@@ -7,12 +7,12 @@
   margin: 0;
   border: 1px #ffffff solid;
   border-radius: 13px;
-  -webkit-transition: all 0.1s linear 0s;
-  -o-transition: all 0.1s linear 0s;
-  transition: all 0.1s linear 0s;
   background-color: transparent;
   font-size: 1rem;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-transition: all 0.1s linear 0s;
+  -o-transition: all 0.1s linear 0s;
+  transition: all 0.1s linear 0s; }
 
 .nav-button-search:hover {
   color: #BDBDBD;

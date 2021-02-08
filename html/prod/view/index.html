@@ -2,17 +2,68 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Collection</title>
     <script src="js/min/main.min.js"></script>
-    <link href="css/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
   </head>
   <body>
     <div class="content">
       <!--menu-->
-      <div class="menu">
-        <p>Да будет тут меню</p>
+      <div class="nav">
+        <!--navLinkSearch-->
+        <!--include ../../components/navLinkSearch/index-->
+        <button class="nav-button-search">Поиск</button>
+        <!--navLinkSearch end-->
+        <div class="nav-wrap">
+          <!--navLink--><a class="nav-link" href="#">Добавить</a><a class="nav-link" href="#">Настройка</a><a class="nav-link" href="#">Выход</a>
+          <!--navLink end-->
+        </div>
       </div>
       <!--menu end-->
+      <!--search form-->
+      <div class="search-form-wrap">
+        <form class="search-form">
+          <div class="search-form__input-wrap">
+            <input class="search-form__input" type="text" name="title" placeholder="Название">
+            <button class="search-form__button" type="submit">Найти</button>
+            <!--categorys-->
+            <div class="categorys">
+              <!--addCategoryButton-->
+              <button class="categorys-add-button">Категории</button>
+              <!--addCategoryButton end-->
+              <!--categoryItem-->
+              <div class="categorys-items-wrap">
+                <label class="category-item">
+                  <div class="category-item__title">Компьютеры</div>
+                  <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                  <button class="category-item__close"></button>
+                </label>
+                <label class="category-item">
+                  <div class="category-item__title">Диски</div>
+                  <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                  <button class="category-item__close"></button>
+                </label>
+                <label class="category-item">
+                  <div class="category-item__title">1990е</div>
+                  <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                  <button class="category-item__close"></button>
+                </label>
+                <label class="category-item">
+                  <div class="category-item__title">Комплектующие</div>
+                  <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                  <button class="category-item__close"></button>
+                </label>
+              </div>
+              <!--categoryItem end-->
+            </div>
+            <!--categorys and-->
+          </div>
+        </form>
+      </div>
+      <!--search form end-->
+      <!--catalog lent-->
+      <!--catalog lent end-->
     </div>
   </body>
 </html>

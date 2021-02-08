@@ -1,0 +1,47 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.search-form-wrap
+  padding: 14px 0 0 0
+
+.search-form
+  padding: 0
+  margin: 0
+
+.search-form__input-wrap
+  display: grid
+  grid-template-columns: minmax(0, 1fr) 150px
+  column-gap: 30px
+  @media screen and (max-width: 480px)
+    column-gap: 10px
+    grid-template-columns: minmax(0, 1fr) 40px
+
+.search-form__input
+  border: 1px #000000 solid
+  font-size: $searchFormFontSize
+  height: 40px
+  padding: 8px
+  box-sizing: border-box
+
+.search-form__button
+  width: 150px
+  height: 40px
+  cursor: pointer
+  font-size: $searchFormFontSize
+  margin: 0
+  padding: 0
+  border: 1px #000000 solid
+  background-color: #ffffff
+  @include transitionHover
+  @media screen and (max-width: 480px)
+    width: 40px
+    height: 40px
+    font-size: 0
+    background-image: url('/img/search.svg')
+    background-repeat: no-repeat
+    background-size: 80% auto
+    background-position: center
+
+.search-form__button:hover
+  border: 1px $searchButtonHoverColor solid
+  color: $searchButtonHoverColor

@@ -7,10 +7,10 @@ a.nav-link {
   border: 1px #ffffff solid;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-size: 1rem;
   -webkit-transition: all 0.1s linear 0s;
   -o-transition: all 0.1s linear 0s;
-  transition: all 0.1s linear 0s;
-  font-size: 1rem; }
+  transition: all 0.1s linear 0s; }
 
 a.nav-link:hover,
 a.nav-link_active {

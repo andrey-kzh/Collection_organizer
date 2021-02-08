@@ -2,10 +2,11 @@ doctype html
 html(lang="ru")
     head
         meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
         title="Collection"
         block scripts
             script(src='/js/min/main.min.js')
-        link(href='/css/main.css', rel='stylesheet')
+        link(href='/css/style.css', rel='stylesheet')
 
     body
         div(class="content")
@@ -13,3 +14,11 @@ html(lang="ru")
             //menu
             include ../../components/nav/index
             //menu end
+
+            //search form
+            include ../../components/searchForm/index
+            //search form end
+
+            //catalog lent
+            include ../../components/catalogLent/index
+            //catalog lent end

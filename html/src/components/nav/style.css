@@ -11,7 +11,12 @@
   -webkit-align-items: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
-  max-width: 650px; }
+  padding: 0 180px 0 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+  @media screen and (max-width: 480px) {
+    .nav {
+      padding: 0; } }
 
 .nav-wrap {
   display: -webkit-box;

@@ -7,10 +7,10 @@ a.nav-link-search {
   margin: 0;
   border: 1px #ffffff solid;
   border-radius: 13px;
+  font-size: 1rem;
   -webkit-transition: all 0.1s linear 0s;
   -o-transition: all 0.1s linear 0s;
-  transition: all 0.1s linear 0s;
-  font-size: 1rem; }
+  transition: all 0.1s linear 0s; }
 
 a.nav-link-search:hover {
   color: #BDBDBD;
