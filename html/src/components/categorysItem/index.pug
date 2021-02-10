@@ -1,0 +1,6 @@
+div(class="categorys-items-wrap")
+    for val in ['Компьютеры', 'Диски', '1990е', 'Комплектующие']
+        label(class="category-item")
+            div(class="category-item__title")=val
+            input(class="category-item__input" type="checkbox" checked name="categitem[]" value="123")
+            button(class="category-item__close")

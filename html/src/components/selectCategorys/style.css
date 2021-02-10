@@ -1,0 +1,18 @@
+.select-category-header {
+  font-size: 2rem;
+  margin: 0 0 40px 0; }
+
+.select-category {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  -webkit-column-gap: 15px;
+     -moz-column-gap: 15px;
+          column-gap: 15px;
+  row-gap: 35px;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start; }
+  @media screen and (max-width: 640px) {
+    .select-category {
+      grid-template-columns: 1fr; } }

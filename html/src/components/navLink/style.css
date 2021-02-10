@@ -1,0 +1,19 @@
+a.nav-link {
+  display: block;
+  padding: 6px 8px;
+  text-decoration: none;
+  color: #000000;
+  margin: 0 0 0 1px;
+  border: 1px #ffffff solid;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 1rem;
+  -webkit-transition: all 0.1s linear 0s;
+  -o-transition: all 0.1s linear 0s;
+  transition: all 0.1s linear 0s; }
+
+a.nav-link:hover,
+a.nav-link_active {
+  color: #BDBDBD;
+  border: 1px #BDBDBD solid;
+  border-radius: 13px; }

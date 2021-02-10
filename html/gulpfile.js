@@ -118,7 +118,7 @@ function clearProd(done) {
 //compression and copy css to production
 function prodCss() {
     return gulp
-        .src('src/css/*.css')
+        .src('src/css/style.css')
         .pipe(replace('/fonts/', '../fonts/'))
         .pipe(replace('/img/', '../img/'))
         .pipe(cssnano())
@@ -167,7 +167,7 @@ function prodFonts() {
 function prodComponents() {
     return gulp
         .src('src/components/**/*.+(html|sass)', {buffer: false})
-        .pipe(replace(/^@import.*/gm, '')) //del import
+        .pipe(replace(/^@import (?:(?!mixins|variables).)*$/gm, '')) //del import without mixins file
         .pipe(replace(/^\/\/.*/gm, '')) //del comments
         //.pipe(replace(/(\r\n|\r|\n){2,}/gm, '\r\n')) //del empty strings
         .pipe(gulp.dest(`${prodFolder}/${frameworkFolder}/components/`))
@@ -177,7 +177,7 @@ function prodComponents() {
 function prodPages() {
     return gulp
         .src('src/pages/**/*.+(html|sass)', {buffer: false})
-        .pipe(replace(/^@import.*/gm, ''))
+        .pipe(replace(/^@import (?:(?!mixins|variables).)*$/gm, ''))
         .pipe(replace(/^\/\/.*/gm, ''))
         .pipe(gulp.dest(`${prodFolder}/${frameworkFolder}/pages/`));
 }
@@ -186,10 +186,10 @@ function prodPages() {
 function prodSassMainFile() {
     return gulp
         .src('src/css/*.sass', {buffer: false})
-        .pipe(rename({dirname: '', basename: 'style'}))
-        .pipe(replace(/^@import.*/gm, ''))
+        //.pipe(rename({dirname: '', basename: 'style'}))
+        .pipe(replace(/^@import (?:(?!mixins|variables).)*$/gm, ''))
         .pipe(replace(/^\/\/.*/gm, ''))
-        .pipe(gulp.dest(`${prodFolder}/${frameworkFolder}/`));
+        .pipe(gulp.dest(`${prodFolder}/${frameworkFolder}/css/`));
 }
 
 
