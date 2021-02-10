@@ -12,7 +12,7 @@
   display: grid
   grid-template-columns: minmax(0, 1fr) 150px
   column-gap: 30px
-  @media screen and (max-width: 480px)
+  @media screen and (max-width: $mobileResolution)
     column-gap: 10px
     grid-template-columns: minmax(0, 1fr) 40px
 
@@ -33,7 +33,7 @@
   border: 1px #000000 solid
   background-color: #ffffff
   @include transitionHover
-  @media screen and (max-width: 480px)
+  @media screen and (max-width: $mobileResolution)
     width: 40px
     height: 40px
     font-size: 0
@@ -43,5 +43,5 @@
     background-position: center
 
 .search-form__button:hover
-  border: 1px $searchButtonHoverColor solid
-  color: $searchButtonHoverColor
+  border: 1px $hoverColor solid
+  color: $hoverColor

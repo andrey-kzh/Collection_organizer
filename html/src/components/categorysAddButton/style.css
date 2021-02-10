@@ -12,7 +12,7 @@
   background: url('data:image/svg+xml;utf8, <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="15" cy="15" r="14.5" fill="none" stroke="black"/><path d="M14.8027 4.73683V24.8684" stroke="black" stroke-width="3"/><path d="M24.8685 14.8026L4.73692 14.8026" stroke="black" stroke-width="3"/></svg>');
   background-position: right center;
   background-repeat: no-repeat; }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 640px) {
     .categorys-add-button {
       margin: 0 10px 20px 0; } }
 

@@ -11,6 +11,6 @@
   -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start; }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 640px) {
     .categorys {
       display: block; } }

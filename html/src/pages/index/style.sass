@@ -1,8 +1,11 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
 .content
-  max-width: 850px
+  max-width: 1000px
   margin: 0 auto
   padding: 58px 20px 0 20px
-  @media screen and (max-width: 480px)
+  @media screen and (max-width: $mobileResolution)
     padding: 10px 20px 0 20px
 
 //Import components style
@@ -11,8 +14,12 @@
 @import "../../components/navLinkSearch/style.sass"
 @import "../../components/navButtonSearch/style.sass"
 @import "../../components/searchForm/style.sass"
-@import "../../components/categoryAddButton/style.sass"
+@import "../../components/categorysAddButton/style.sass"
 @import "../../components/categorys/style.sass"
 @import "../../components/categorys/style.sass"
-@import "../../components/categoryItem/style.sass"
+@import "../../components/categorysItem/style.sass"
 @import "../../components/catalogLent/style.sass"
+@import "../../components/button/style.sass"
+@import "../../components/popup/style.sass"
+@import "../../components/selectCategorys/style.sass"
+@import "../../components/selectCategorysItem/style.sass"

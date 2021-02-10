@@ -1,0 +1,57 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.popup-wrap
+  width: 100%
+  height: 100%
+  position: fixed
+  top: 0
+  left: 0
+  display: flex
+  align-items: center
+  align-content: center
+  justify-content: center
+  overflow: hidden
+  backdrop-filter: blur(3px)
+  z-index: 100
+
+.popup
+  max-width: 80%
+  display: inline-block
+  border: 1px #000000 solid
+  background-color: #ffffff
+  padding: 30px
+  box-sizing: border-box
+  box-shadow: 4px 4px 0 0 rgba(50, 50, 50, 0.75)
+  @media screen and (max-width: $mobileResolution)
+    max-width: 100%
+    width: 100%
+    height: 100%
+
+.popup__content
+  overflow-y: auto
+  max-height: 80vh
+  padding: 0 0 10px 0
+  box-sizing: border-box
+  @media screen and (max-width: $mobileResolution)
+    max-height: 100%
+    height: 100%
+    overflow-x: hidden
+    padding: 0 0 30px 0
+
+.popup__close-wrap
+  text-align: right
+
+.popup__close
+  padding: 0
+  margin: 0
+  border: 0
+  background: url('data:image/svg+xml;utf8, <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10.5" fill="none" stroke="black"/><path d="M16.1265 5.62347L5.87348 15.8765" stroke="black"/><path d="M16.1265 15.8765L5.87348 5.62348" stroke="black"/></svg>')
+  background-size: contain
+  height: 30px
+  width: 30px
+  cursor: pointer
+
+.popup__close:hover
+  background: url('data:image/svg+xml;utf8, <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10.5" fill="none" stroke="rgba(189,189,189,1)"/><path d="M16.1265 5.62347L5.87348 15.8765" stroke="rgba(189,189,189,1)"/><path d="M16.1265 15.8765L5.87348 5.62348" stroke="rgba(189,189,189,1)"/></svg>')
+  background-size: contain

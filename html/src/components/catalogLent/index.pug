@@ -1,0 +1,16 @@
+div(class="catalog")
+    for title in ['Материнская плата socket 370', 'Dungeon Keeper', 'Sound Blaster Pro', '486 компьютер']
+        div(class="catalog-item")
+            div(class="catalog-item__img" style={'background-image': 'url("/img/486pc.jpg")'})
+            div(class="catalog-item__txt")
+                div(class="catalog-item__header")=title
+                div(class="catalog-item__categorys")
+                    for val in ['1990е', 'Компьютеры', 'Игры', 'Комплектующие']
+                        div(class="catalog-item__category-item")=val
+                div(class="catalog-item__anons")
+                    |Вот вам яркий пример современных тенденций - укрепление и развитие внутренней структуры однозначно фиксирует необходимость дальнейших направлений развития. Не следует, однако, забывать, что базовый вектор развития предоставляет широкие возможности для благоприятных перспектив.
+            div(class="catalog-item__ctrl-buttons")
+                //button
+                include ../button/index
+                //button end
+
