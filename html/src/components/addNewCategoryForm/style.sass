@@ -1,0 +1,63 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.add-category-form-wrap
+  padding: 14px 0 0 0
+
+.add-category-form
+  padding: 0
+  margin: 0
+
+.add-category-form__header
+  padding: 0 0 5px 0
+
+.add-category-form__input-wrap
+  display: grid
+  grid-template-columns: minmax(0, 1fr) 150px
+  column-gap: 30px
+  @media screen and (max-width: $mobileResolution)
+    column-gap: 10px
+    grid-template-columns: minmax(0, 1fr) 40px
+
+.add-category-form__input
+  border: 1px #000000 solid
+  font-size: $searchFormFontSize
+  height: 40px
+  padding: 8px
+  box-sizing: border-box
+
+.add-category-form__button
+  width: 150px
+  height: 40px
+  cursor: pointer
+  font-size: $searchFormFontSize
+  margin: 0
+  padding: 0
+  border: 1px #000000 solid
+  background-color: #ffffff
+  @include transitionHover
+  @media screen and (max-width: $mobileResolution)
+    width: 40px
+    height: 40px
+    font-size: 0
+    position: relative
+
+.add-category-form__button::after,
+.add-category-form__button::before
+  @media screen and (max-width: $mobileResolution)
+    content: ''
+    display: block
+    width: 80%
+    height: 4px
+    background-color: #000000
+    position: absolute
+    left: 10%
+    top: 17px
+
+.add-category-form__button::after
+  @media screen and (max-width: $mobileResolution)
+    transform: rotate(90deg)
+
+.add-category-form__button:hover
+  border: 1px $hoverColor solid
+  color: $hoverColor
