@@ -1,0 +1,17 @@
+.setup-category-edit {
+  margin: 20px 0 0 0; }
+
+.setup-category-edit__title-input {
+  width: 100%;
+  padding: 8px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
+
+.setup-category-edit__buttons-wrap {
+  margin: 20px 0 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-column-gap: 20px; }
+
+.popup-wrap_setup-categorys {
+  display: none; }

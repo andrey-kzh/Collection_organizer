@@ -1,12 +1,12 @@
 
-<div class="popup-wrap">
+<div class="popup-wrap" id="selcat" style="display:none;">
   <div class="popup">
     <div class="popup__close-wrap">
-      <button class="popup__close"></button>
+      <button class="popup__close" onclick="showHideDiv('selcat')"></button>
     </div>
     <div class="popup__content">
       <div class="select-category-header">Категории</div>
-      <div class="select-category">
+      <div class="select-category select-category_none">
         <!--selectCategoryItem-->
         <label class="select-category-item">
           <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"/><span class="select-category-item__title">Диски</span>

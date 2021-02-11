@@ -1,3 +1,6 @@
+@import ./mixins.sass
+@import ./variables.sass
+
 @font-face
 	font-family: "Roboto-Regular"
 	src: url("/fonts/Roboto-Regular.eot?") format("eot")
@@ -10,7 +13,35 @@ html, body
 	font-size: 14px
 	font-family: Roboto-Regular
 
+.content
+	max-width: 1000px
+	margin: 0 auto
+	padding: 58px 20px 0 20px
+	@media screen and (max-width: $mobileResolution)
+		padding: 10px 20px 0 20px
+
+
 //Import pages style
 @import "../pages/index/style.sass"
+@import "../pages/setup/style.sass"
+
+
+//Import components style
+@import "../components/nav/style.sass"
+@import "../components/navLink/style.sass"
+@import "../components/navLinkSearch/style.sass"
+@import "../components/navButtonSearch/style.sass"
+@import "../components/searchForm/style.sass"
+@import "../components/categorysAddButton/style.sass"
+@import "../components/categorys/style.sass"
+@import "../components/categorysItem/style.sass"
+@import "../components/catalogLent/style.sass"
+@import "../components/button/style.sass"
+@import "../components/popup/style.sass"
+@import "../components/selectCategorys/style.sass"
+@import "../components/selectCategorysItem/style.sass"
+@import "../components/addNewCategoryForm/style.sass"
+@import "../components/setupCategorysLent/style.sass"
+@import "../components/setupCategorysEditWin/style.sass"
 
 

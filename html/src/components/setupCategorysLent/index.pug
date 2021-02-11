@@ -1,0 +1,12 @@
+div(class="setup-categorys")
+    for val in ['Компьютеры', 'Компектующие', 'Видеокассеты', 'Диски']
+        div(class="setup-categorys__item")
+            span(class="setup-categorys__header")=val
+            //button
+            button(class="button button_setup-categorys-item") Редактировать
+            //button end
+
+            //setupCategorysEditWin
+            include ../setupCategorysEditWin/index
+            //setupCategorysEditWin end
+
