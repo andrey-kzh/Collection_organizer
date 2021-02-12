@@ -3,15 +3,24 @@
 
 .setup-category-edit__title-input {
   width: 100%;
+  min-width: 320px;
   padding: 8px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
+  @media screen and (max-width: 640px) {
+    .setup-category-edit__title-input {
+      min-width: auto; } }
 
 .setup-category-edit__buttons-wrap {
   margin: 20px 0 0 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-column-gap: 20px; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
 
 .popup-wrap_setup-categorys {
   display: none; }

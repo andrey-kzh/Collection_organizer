@@ -16,3 +16,6 @@
   @media screen and (max-width: 640px) {
     .select-category {
       grid-template-columns: 1fr; } }
+
+.popup-wrap_select-category {
+  display: none; }

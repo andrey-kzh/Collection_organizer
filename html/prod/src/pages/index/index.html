@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="content">
-      <!--menu-->
+      <!--nav-->
       <div class="nav">
         <!--navLinkSearch-->
         <!--include ../../components/navLinkSearch/index-->
@@ -20,7 +20,7 @@
           <!--navLink end-->
         </div>
       </div>
-      <!--menu end-->
+      <!--nav end-->
       <!--search form-->
       <div class="search-form-wrap">
         <form class="search-form">
@@ -143,8 +143,150 @@
       </div>
       <!--catalog lent end-->
       <!--selectCategorys-->
-      <!--include ../../components/selectCategorys/index-->
+      <div class="popup-wrap popup-wrap_select-category" id="selcat">
+        <div class="popup">
+          <div class="popup__close-wrap">
+            <button class="popup__close" onclick="showHideDiv('selcat')"></button>
+          </div>
+          <div class="popup__content">
+            <div class="select-category-header">Категории</div>
+            <div class="select-category select-category_none">
+              <!--selectCategoryItem-->
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Диски</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">1990е</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Комплектующие</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Комплектующие</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Компьютеры</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Диски</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">1990е</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Тест</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Игры</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Аудиокассеты</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Видеокассеты</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Компьютеры</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Диски</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">1990е</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Комплектующие</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Комплектующие</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Компьютеры</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Диски</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">1990е</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Тест</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Игры</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Аудиокассеты</span>
+              </label>
+              <label class="select-category-item">
+                <input class="select-category-item__input" type="checkbox" name="categitem[]" value="123"><span class="select-category-item__title">Видеокассеты</span>
+              </label>
+              <!--selectCategoryItem end-->
+            </div>
+          </div>
+        </div>
+      </div>
       <!--selectCategorys end-->
+      <!--editCatalogItem-->
+      <div class="popup-wrap popup-wrap_edit-cat-item">
+        <div class="popup">
+          <div class="popup__close-wrap">
+            <button class="popup__close"></button>
+          </div>
+          <div class="popup__content">
+            <form class="edit-cat-item-form">
+              <div class="edit-cat-item-form__img-wrap">
+                <div>
+                  <div class="edit-cat-item-form__input-title">Изображение</div>
+                  <label class="button edit-cat-item-form__img-button">Открыть
+                    <input class="edit-cat-item-form__img-input" type="file" name="image">
+                  </label>
+                </div>
+                <div class="edit-cat-item-form__img" style="background-image:url(&quot;../../img/486pc.jpg&quot;);"></div>
+              </div>
+              <div class="edit-cat-item-form__input-wrap">
+                <div class="edit-cat-item-form__input-title">Заголовок</div>
+                <input class="edit-cat-item-form__input" type="text" name="title">
+                <div class="edit-cat-item-form__input-title">Описание</div>
+                <textarea class="edit-cat-item-form__textarea" name="anons"></textarea>
+              </div>
+              <div class="categorys">
+                <!--addCategoryButton-->
+                <button class="categorys-add-button">Категории</button>
+                <!--addCategoryButton end-->
+                <!--categoryItem-->
+                <div class="categorys-items-wrap">
+                  <label class="category-item">
+                    <div class="category-item__title">Компьютеры</div>
+                    <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                    <button class="category-item__close"></button>
+                  </label>
+                  <label class="category-item">
+                    <div class="category-item__title">Диски</div>
+                    <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                    <button class="category-item__close"></button>
+                  </label>
+                  <label class="category-item">
+                    <div class="category-item__title">1990е</div>
+                    <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                    <button class="category-item__close"></button>
+                  </label>
+                  <label class="category-item">
+                    <div class="category-item__title">Комплектующие</div>
+                    <input class="category-item__input" type="checkbox" checked name="categitem[]" value="123">
+                    <button class="category-item__close"></button>
+                  </label>
+                </div>
+                <!--categoryItem end-->
+              </div>
+              <div class="edit-cat-item-form__submit-wrap">
+                <button class="button">Сохранить</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--editCatalogItem end-->
     </div>
   </body>
 </html>
