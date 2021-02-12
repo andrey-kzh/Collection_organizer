@@ -1,0 +1,32 @@
+div(class="popup-wrap popup-wrap_edit-cat-item")
+    div(class="popup")
+        div(class="popup__close-wrap")
+            button(class="popup__close")
+        div(class="popup__content")
+            form(class="edit-cat-item-form")
+
+                div(class="edit-cat-item-form__img-wrap")
+                    div
+                        div(class="edit-cat-item-form__input-title") Изображение
+                        label(class="button edit-cat-item-form__img-button") Открыть
+                            input(type="file" name="image" class="edit-cat-item-form__img-input")
+                    div(class="edit-cat-item-form__img" style={'background-image': 'url("../../img/486pc.jpg")'})
+
+                div(class="edit-cat-item-form__input-wrap")
+                    div(class="edit-cat-item-form__input-title") Заголовок
+                    input(class="edit-cat-item-form__input" type="text" name="title")
+
+                    div(class="edit-cat-item-form__input-title") Описание
+                    textarea(class="edit-cat-item-form__textarea" name="anons")
+
+                div(class="categorys")
+                    //addCategoryButton
+                    include  ../categorysAddButton/index
+                    //addCategoryButton end
+
+                    //categoryItem
+                    include  ../categorysItem/index
+                    //categoryItem end
+
+                div(class="edit-cat-item-form__submit-wrap")
+                    button(class="button") Сохранить

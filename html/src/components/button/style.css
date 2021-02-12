@@ -3,7 +3,9 @@
   border: 1px #000000 solid;
   width: 150px;
   height: 30px;
-  cursor: pointer; }
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
 
 .button:hover {
   border: 1px #BDBDBD solid;
