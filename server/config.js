@@ -5,5 +5,10 @@ module.exports = {
         name:'collection',
         user: 'coluser',
         password: '1gL03ywMZ8jLgy47',
+    },
+    crypto: {
+        iterations: 12000,
+        length: 128,
+        digest: 'sha512',
     }
 }

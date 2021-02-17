@@ -128,6 +128,42 @@ ALTER SEQUENCE public.related_categories_id_seq OWNED BY public.related_categori
 
 
 --
+-- Name: sessions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sessions (
+    id integer NOT NULL,
+    id_user integer,
+    token text,
+    expires timestamp without time zone
+);
+
+
+ALTER TABLE public.sessions OWNER TO postgres;
+
+--
+-- Name: session_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.session_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.session_id_seq OWNER TO postgres;
+
+--
+-- Name: session_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.session_id_seq OWNED BY public.sessions.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -186,6 +222,13 @@ ALTER TABLE ONLY public.related_categories ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
+-- Name: sessions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.session_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -218,11 +261,20 @@ COPY public.related_categories (id, id_catalog, id_category) FROM stdin;
 
 
 --
+-- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.sessions (id, id_user, token, expires) FROM stdin;
+1	1	6djk28sde2	\N
+\.
+
+
+--
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.users (id, name, login, password, salt) FROM stdin;
-1	Тестовый пользователь	test	123	\N
+6	Андрей	test	7502744d9752e1646438855a0a85e508066b9de4c2b689c20cbbb6f97d2ee8f565b9d2f0cbdf0b9d076b53263324e001212ed0c321ecb2b0650036c18a9cd83e4da438a88a6993b0f96fb1387a9b7a8371b3ee564e7c9b45637dc1db28affef56b827379ced7e3fe869006f896f2f0f4963d4c9093ad170ace780246dff2d5d1	f51f7939594992c35c95d9a17b2c8f5a2750e53deaab1e45cae6617a3f82fac6542b4952d7d441f78388cea6708b2f810d42e54100b4d041ef64c1110cd33953c1446d0cc1b27b9499354ae2255da4d65cf8319d8723155db4cd0867e9deb8401ecccb660cfcee5e2507cc9e573687b7c0731fdd122704c0f5f2444775e22682
 \.
 
 
@@ -248,10 +300,17 @@ SELECT pg_catalog.setval('public.related_categories_id_seq', 1, false);
 
 
 --
+-- Name: session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.session_id_seq', 1, true);
+
+
+--
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.users_id_seq', 7, true);
 
 
 --
@@ -291,10 +350,31 @@ CREATE INDEX related_index ON public.related_categories USING btree (id_catalog,
 
 
 --
+-- Name: session_id_uindex; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX session_id_uindex ON public.sessions USING btree (id);
+
+
+--
+-- Name: token_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX token_index ON public.sessions USING btree (token);
+
+
+--
 -- Name: users_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX users_id_uindex ON public.users USING btree (id);
+
+
+--
+-- Name: users_login_uindex; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX users_login_uindex ON public.users USING btree (login);
 
 
 --
@@ -305,10 +385,24 @@ GRANT ALL ON TABLE public.catalog TO coluser;
 
 
 --
+-- Name: SEQUENCE catalog_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.catalog_id_seq TO coluser;
+
+
+--
 -- Name: TABLE categories; Type: ACL; Schema: public; Owner: postgres
 --
 
 GRANT ALL ON TABLE public.categories TO coluser;
+
+
+--
+-- Name: SEQUENCE categories_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.categories_id_seq TO coluser;
 
 
 --
@@ -319,10 +413,31 @@ GRANT ALL ON TABLE public.related_categories TO coluser;
 
 
 --
+-- Name: SEQUENCE related_categories_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.related_categories_id_seq TO coluser;
+
+
+--
+-- Name: SEQUENCE session_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.session_id_seq TO coluser;
+
+
+--
 -- Name: TABLE users; Type: ACL; Schema: public; Owner: postgres
 --
 
 GRANT ALL ON TABLE public.users TO coluser;
+
+
+--
+-- Name: SEQUENCE users_id_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.users_id_seq TO coluser;
 
 
 --
