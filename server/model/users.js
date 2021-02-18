@@ -16,6 +16,19 @@ module.exports = {
             })
     },
 
+
+    selectUser: function (login) {
+        return db.oneOrNone(
+                `SELECT * FROM users WHERE login=$1`, login)
+            .then((data) => {
+                return data
+            })
+            .catch((error) => {
+                throw error
+            })
+    },
+
+
     generateSalt: function () {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(config.crypto.length, (err, buffer) => {
@@ -40,5 +53,10 @@ module.exports = {
         });
     },
 
-    _checkPassword: {},
+    checkPassword: async function(salt, password, passwordHash) {
+        if (!password) return false
+        const hash = await this.generatePassword(salt, password);
+        return hash === passwordHash;
+    },
+
 }

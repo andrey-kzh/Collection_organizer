@@ -10,5 +10,6 @@ module.exports = {
         iterations: 12000,
         length: 128,
         digest: 'sha512',
-    }
+    },
+    jwtSecretKey: 'kep3H1x94s024l',
 }
