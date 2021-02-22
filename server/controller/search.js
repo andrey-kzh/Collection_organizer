@@ -1,5 +1,5 @@
 module.exports = {
 
-    returnSearchResult: {async function (req, res, next) {}},
+  returnSearchResult: { async function(req, res, next) {} },
 
-}
+};
