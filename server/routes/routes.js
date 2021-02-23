@@ -1,26 +1,26 @@
 const router = require('express').Router();
 const users = require('../controller/users');
 const catalog = require('../controller/catalog');
-const categories = require('../controller/categories');
+const category = require('../controller/category');
 const search = require('../controller/search');
-// const sessions = require('../controller/sessions')
+const guard = require('../controller/guard');
 
-router.post('/users/register', (req, res, next) => users.register(req, res, next));
-router.post('/users/login', (req, res, next) => users.login(req, res, next));
-router.post('/users/logout', (req, res, next) => users.logout(req, res, next));
+router.use(users.authorization);
 
-// router.post('/users/auth', (req, res, next) => users.authorization(req, res, next))
+router.post('/users/register', users.register);
+router.post('/users/login', users.login);
+router.post('/users/logout', users.logout);
 
-router.get('/catalog', (req, res, next) => catalog.getCatalogItem(req, res, next));
-router.post('/catalog', (req, res, next) => catalog.addCatalogItem(req, res, next));
-router.put('/catalog', (req, res, next) => catalog.updateCatalogItem(req, res, next));
-router.delete('/catalog', (req, res, next) => catalog.deleteCatalogItem(req, res, next));
+router.get('/catalog', guard.mustBeAuthenticated, catalog.getCatalogItem);
+router.post('/catalog', catalog.addCatalogItem);
+router.put('/catalog', catalog.updateCatalogItem);
+router.delete('/catalog', catalog.deleteCatalogItem);
 
-router.get('/categories', (req, res, next) => categories.getAllCategorys(req, res, next));
-router.post('/categories', (req, res, next) => categories.addCategoryItem(req, res, next));
-router.put('/categories', (req, res, next) => categories.updateCategoryItem(req, res, next));
-router.delete('/categories', (req, res, next) => categories.deleteCategoryItem(req, res, next));
+router.get('/category', category.getAllCategorys);
+router.post('/category', category.addCategoryItem);
+router.put('/category', category.updateCategoryItem);
+router.delete('/category', category.deleteCategoryItem);
 
-router.get('/search', (req, res, next) => search.returnSearchResult(req, res, next));
+router.get('/search', search.returnSearchResult);
 
 module.exports = router;

@@ -1,8 +1,14 @@
 module.exports = {
 
-  getCatalogItem: { async function(req, res, next) {} },
-  addCatalogItem: { async function(req, res, next) {} },
-  updateCatalogItem: { async function(req, res, next) {} },
-  deleteCatalogItem: { async function(req, res, next) {} },
+  async getCatalogItem(req, res, next) {
+    res.status(200).json({});
+  },
+
+  async addCatalogItem(req, res, next) {
+  },
+  async updateCatalogItem(req, res, next) {
+  },
+  async deleteCatalogItem(req, res, next) {
+  },
 
 };

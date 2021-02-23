@@ -18,7 +18,7 @@ module.exports = {
 
   selectSessionByUserId(userId) {
     return db.oneOrNone(
-      'SELECT id FROM sessions WHERE id_user = $1', userId,
+      'SELECT id_session FROM sessions WHERE id_user = $1', userId,
     )
       .then((data) => data)
       .catch((error) => {
@@ -28,8 +28,18 @@ module.exports = {
 
   updateLastVisit(id) {
     return db.oneOrNone(
-      'UPDATE sessions SET last_visit = $1 WHERE id = $2 RETURNING token',
+      'UPDATE sessions SET last_visit = $1 WHERE id_session = $2 RETURNING token',
       [new Date().toISOString(), id],
+    )
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
+  },
+
+  delete(id) {
+    return db.oneOrNone(
+      'DELETE FROM sessions WHERE id_session = $1 RETURNING id_session', id,
     )
       .then((data) => data)
       .catch((error) => {
@@ -43,6 +53,16 @@ module.exports = {
       const payload = { userId };
       resolve(jwt.sign(payload, config.jwtSecretKey));
     });
+  },
+
+  selectSessionByToken(token) {
+    return db.oneOrNone(
+      'SELECT * FROM sessions LEFT JOIN users ON sessions.id_user = users.id_user WHERE token = $1', token,
+    )
+      .then((data) => data)
+      .catch((error) => {
+        throw error;
+      });
   },
 
 };

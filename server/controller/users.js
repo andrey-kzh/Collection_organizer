@@ -1,6 +1,8 @@
 const Users = require('../model/users');
 const Sessions = require('../model/sessions');
 const err = require('../libs/exception').errorCreator;
+const { localStorage } = require('../libs/asyncLocalStorage');
+const config = require('../config');
 
 module.exports = {
 
@@ -28,12 +30,12 @@ module.exports = {
           const isLogin = await Users.checkPassword(user.salt, password, user.password);
           if (isLogin) {
             let session;
-            const existingSession = await Sessions.selectSessionByUserId(user.id);
+            const existingSession = await Sessions.selectSessionByUserId(user.id_user);
             if (existingSession) {
-              session = await Sessions.updateLastVisit(existingSession.id);
+              session = await Sessions.updateLastVisit(existingSession.id_session);
             } else {
-              const token = await Sessions.createToken(user.id);
-              session = await Sessions.addNewSession(user.id, token);
+              const token = await Sessions.createToken(user.id_user);
+              session = await Sessions.addNewSession(user.id_user, token);
             }
             res.status(200).json({ token: session.token });
           } else throw { status: 401, message: 'User not found' };
@@ -45,8 +47,34 @@ module.exports = {
     next();
   },
 
-  logout: {
-    async function(req, res, next) {
-    },
+  async logout(req, res, next) {
   },
+
+  async authorization(req, res, next) {
+    try {
+      const header = req.get('Authorization');
+      if (!header) return next();
+
+      const token = header.split(' ')[1];
+      if (!token) return next();
+
+      const session = await Sessions.selectSessionByToken(token);
+      if (!session) return next();
+
+      const expires = new Date();
+      expires.setDate(expires.getDate() - config.sessionExpirationDays);
+
+      if (new Date(session.last_visit) < expires) {
+        await Sessions.delete(session.id_session);
+        return next();
+      }
+
+      await localStorage.getStore().set('session', session);
+      await Sessions.updateLastVisit(session.id_session);
+    } catch (e) {
+      next(err(e));
+    }
+    next();
+  },
+
 };

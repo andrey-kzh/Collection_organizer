@@ -6,7 +6,7 @@ module.exports = {
 
   addNewUser(name, login, passwordHash, salt) {
     return db.oneOrNone(
-      'INSERT INTO users (name, login, password, salt) VALUES ($1, $2, $3, $4) RETURNING id',
+      'INSERT INTO users (name, login, password, salt) VALUES ($1, $2, $3, $4) RETURNING id_user',
       [name, login, passwordHash, salt],
     )
       .then((data) => data)
@@ -17,7 +17,7 @@ module.exports = {
 
   selectUser(login) {
     return db.oneOrNone(
-      'SELECT * FROM users WHERE login=$1', login,
+      'SELECT * FROM users WHERE login = $1', login,
     )
       .then((data) => data)
       .catch((error) => {
