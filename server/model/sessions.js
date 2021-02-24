@@ -7,7 +7,7 @@ module.exports = {
   async addNewSession(userId, token) {
     if (!token || !userId) return false;
     return db.oneOrNone(
-      'INSERT INTO sessions (id_user, token, last_visit) VALUES ($1, $2, $3) RETURNING token',
+      'INSERT INTO sessions (user_id, token, last_visit) VALUES ($1, $2, $3) RETURNING token',
       [userId, token, new Date().toISOString()],
     )
       .then((data) => data)
@@ -18,7 +18,7 @@ module.exports = {
 
   selectSessionByUserId(userId) {
     return db.oneOrNone(
-      'SELECT id_session FROM sessions WHERE id_user = $1', userId,
+      'SELECT id FROM sessions WHERE user_id = $1', userId,
     )
       .then((data) => data)
       .catch((error) => {
@@ -28,7 +28,7 @@ module.exports = {
 
   updateLastVisit(id) {
     return db.oneOrNone(
-      'UPDATE sessions SET last_visit = $1 WHERE id_session = $2 RETURNING token',
+      'UPDATE sessions SET last_visit = $1 WHERE id = $2 RETURNING token',
       [new Date().toISOString(), id],
     )
       .then((data) => data)
@@ -39,7 +39,7 @@ module.exports = {
 
   delete(id) {
     return db.oneOrNone(
-      'DELETE FROM sessions WHERE id_session = $1 RETURNING id_session', id,
+      'DELETE FROM sessions WHERE id = $1 RETURNING id', id,
     )
       .then((data) => data)
       .catch((error) => {
@@ -57,7 +57,8 @@ module.exports = {
 
   selectSessionByToken(token) {
     return db.oneOrNone(
-      'SELECT * FROM sessions LEFT JOIN users ON sessions.id_user = users.id_user WHERE token = $1', token,
+      'SELECT sessions.id, sessions.user_id, sessions.token, sessions.last_visit, users.name, users.login '
+            + 'FROM sessions LEFT JOIN users ON sessions.user_id = users.id WHERE token = $1', token,
     )
       .then((data) => data)
       .catch((error) => {

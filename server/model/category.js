@@ -4,7 +4,7 @@ module.exports = {
 
   selectAllCategorys(userId) {
     return db.manyOrNone(
-      'SELECT id_category, title FROM category WHERE id_user = $1', userId,
+      'SELECT id, title FROM category WHERE user_id = $1', userId,
     )
       .then((data) => data)
       .catch((error) => {
@@ -14,7 +14,7 @@ module.exports = {
 
   addNewCategory(title, userId) {
     return db.oneOrNone(
-      'INSERT INTO category (title, id_user) VALUES ($1, $2) RETURNING id_category',
+      'INSERT INTO category (title, user_id) VALUES ($1, $2) RETURNING id',
       [title, userId],
     )
       .then((data) => data)
@@ -25,7 +25,7 @@ module.exports = {
 
   updateCategory(title, id) {
     return db.oneOrNone(
-      'UPDATE category SET title = $1 WHERE id_category = $2 RETURNING id_category',
+      'UPDATE category SET title = $1 WHERE id = $2 RETURNING id',
       [title, id],
     )
       .then((data) => data)

@@ -6,7 +6,7 @@ module.exports = {
 
   addNewUser(name, login, passwordHash, salt) {
     return db.oneOrNone(
-      'INSERT INTO users (name, login, password, salt) VALUES ($1, $2, $3, $4) RETURNING id_user',
+      'INSERT INTO users (name, login, password, salt) VALUES ($1, $2, $3, $4) RETURNING id',
       [name, login, passwordHash, salt],
     )
       .then((data) => data)

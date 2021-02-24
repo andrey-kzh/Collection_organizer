@@ -28,18 +28,17 @@ CREATE TABLE public.catalog (
     id integer NOT NULL,
     title character varying(256),
     anons text,
-    image character varying(256),
-    id_user integer
+    user_id integer
 );
 
 
 ALTER TABLE public.catalog OWNER TO postgres;
 
 --
--- Name: catalog_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: catalog_id_catalog_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
-CREATE SEQUENCE public.catalog_id_seq
+CREATE SEQUENCE public.catalog_id_catalog_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -48,27 +47,27 @@ CREATE SEQUENCE public.catalog_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.catalog_id_seq OWNER TO postgres;
+ALTER TABLE public.catalog_id_catalog_seq OWNER TO postgres;
 
 --
--- Name: catalog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: catalog_id_catalog_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.catalog_id_seq OWNED BY public.catalog.id;
+ALTER SEQUENCE public.catalog_id_catalog_seq OWNED BY public.catalog.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: category; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.categories (
+CREATE TABLE public.category (
     id integer NOT NULL,
     title character varying(128),
-    id_user integer
+    user_id integer
 );
 
 
-ALTER TABLE public.categories OWNER TO postgres;
+ALTER TABLE public.category OWNER TO postgres;
 
 --
 -- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -89,21 +88,21 @@ ALTER TABLE public.categories_id_seq OWNER TO postgres;
 -- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
+ALTER SEQUENCE public.categories_id_seq OWNED BY public.category.id;
 
 
 --
--- Name: related_categories; Type: TABLE; Schema: public; Owner: postgres
+-- Name: related_category; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.related_categories (
+CREATE TABLE public.related_category (
     id integer NOT NULL,
-    id_catalog integer,
-    id_category integer
+    catalog_id integer,
+    category_id integer
 );
 
 
-ALTER TABLE public.related_categories OWNER TO postgres;
+ALTER TABLE public.related_category OWNER TO postgres;
 
 --
 -- Name: related_categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -124,7 +123,7 @@ ALTER TABLE public.related_categories_id_seq OWNER TO postgres;
 -- Name: related_categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE public.related_categories_id_seq OWNED BY public.related_categories.id;
+ALTER SEQUENCE public.related_categories_id_seq OWNED BY public.related_category.id;
 
 
 --
@@ -133,9 +132,9 @@ ALTER SEQUENCE public.related_categories_id_seq OWNED BY public.related_categori
 
 CREATE TABLE public.sessions (
     id integer NOT NULL,
-    id_user integer,
+    user_id integer,
     token text,
-    expires timestamp without time zone
+    last_visit timestamp without time zone
 );
 
 
@@ -204,21 +203,21 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 -- Name: catalog id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.catalog ALTER COLUMN id SET DEFAULT nextval('public.catalog_id_seq'::regclass);
+ALTER TABLE ONLY public.catalog ALTER COLUMN id SET DEFAULT nextval('public.catalog_id_catalog_seq'::regclass);
 
 
 --
--- Name: categories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: category id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
+ALTER TABLE ONLY public.category ALTER COLUMN id SET DEFAULT nextval('public.categories_id_seq'::regclass);
 
 
 --
--- Name: related_categories id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: related_category id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.related_categories ALTER COLUMN id SET DEFAULT nextval('public.related_categories_id_seq'::regclass);
+ALTER TABLE ONLY public.related_category ALTER COLUMN id SET DEFAULT nextval('public.related_categories_id_seq'::regclass);
 
 
 --
@@ -239,24 +238,27 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: catalog; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.catalog (id, title, anons, image, id_user) FROM stdin;
-1	Тестовый заголовок	\N	\N	\N
+COPY public.catalog (id, title, anons, user_id) FROM stdin;
 \.
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.categories (id, title, id_user) FROM stdin;
+COPY public.category (id, title, user_id) FROM stdin;
+4	Диски	41
+5	Кассеты	41
+6	Тест2	41
+7	Пластинки2	41
 \.
 
 
 --
--- Data for Name: related_categories; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: related_category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.related_categories (id, id_catalog, id_category) FROM stdin;
+COPY public.related_category (id, catalog_id, category_id) FROM stdin;
 \.
 
 
@@ -264,8 +266,8 @@ COPY public.related_categories (id, id_catalog, id_category) FROM stdin;
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sessions (id, id_user, token, expires) FROM stdin;
-1	1	6djk28sde2	\N
+COPY public.sessions (id, user_id, token, last_visit) FROM stdin;
+8	41	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJpYXQiOjE2MTQxNjk2OTV9.0KUq0bEAdNsK2qVj8xGVWH0PbQODpPDtP4w9pduQIe4	2021-02-24 13:35:55.853
 \.
 
 
@@ -274,22 +276,22 @@ COPY public.sessions (id, id_user, token, expires) FROM stdin;
 --
 
 COPY public.users (id, name, login, password, salt) FROM stdin;
-6	Андрей	test	7502744d9752e1646438855a0a85e508066b9de4c2b689c20cbbb6f97d2ee8f565b9d2f0cbdf0b9d076b53263324e001212ed0c321ecb2b0650036c18a9cd83e4da438a88a6993b0f96fb1387a9b7a8371b3ee564e7c9b45637dc1db28affef56b827379ced7e3fe869006f896f2f0f4963d4c9093ad170ace780246dff2d5d1	f51f7939594992c35c95d9a17b2c8f5a2750e53deaab1e45cae6617a3f82fac6542b4952d7d441f78388cea6708b2f810d42e54100b4d041ef64c1110cd33953c1446d0cc1b27b9499354ae2255da4d65cf8319d8723155db4cd0867e9deb8401ecccb660cfcee5e2507cc9e573687b7c0731fdd122704c0f5f2444775e22682
+41	Андрей	test	40abac5ea0d0c22366d89915fe9805a3c82598731494b2e78e2f0b2dcb2094aedd61268df803abf9efff5e2b578e473dd22ed3b9129eb7ded1b0636be91e0bfd97f68c48998d509e278c2989ef99928a6160932ebdee5119046e8f3c458eca7eb77ae966cc26dcf15d39df9bc1e99a15855ef27e68841988eb00a879fccae6f3	d879900215e918ff1d73d1a22d0dacf8ad5aceff998e1b93b8c25232052682ad60a0c3be336a1c0c84f35f16f5648185af05c44d9dec2402f72ad68084414b4245d82ef632b5b1b1f8eab724972daccfe45d0ff07a323ef8c2a3c3993495bff8b030d0959f88d7b036bb97e72d4124ab32d37a59c4ca195bd0a405e84bc8ffb7
 \.
 
 
 --
--- Name: catalog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: catalog_id_catalog_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.catalog_id_seq', 1, true);
+SELECT pg_catalog.setval('public.catalog_id_catalog_seq', 1, false);
 
 
 --
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categories_id_seq', 1, false);
+SELECT pg_catalog.setval('public.categories_id_seq', 7, true);
 
 
 --
@@ -303,14 +305,14 @@ SELECT pg_catalog.setval('public.related_categories_id_seq', 1, false);
 -- Name: session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.session_id_seq', 1, true);
+SELECT pg_catalog.setval('public.session_id_seq', 8, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 7, true);
+SELECT pg_catalog.setval('public.users_id_seq', 41, true);
 
 
 --
@@ -322,31 +324,31 @@ ALTER TABLE ONLY public.catalog
 
 
 --
--- Name: catalog_id_uindex; Type: INDEX; Schema: public; Owner: postgres
+-- Name: catalog_id_catalog_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE UNIQUE INDEX catalog_id_uindex ON public.catalog USING btree (id);
+CREATE UNIQUE INDEX catalog_id_catalog_uindex ON public.catalog USING btree (id);
 
 
 --
 -- Name: categories_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE UNIQUE INDEX categories_id_uindex ON public.categories USING btree (id);
+CREATE UNIQUE INDEX categories_id_uindex ON public.category USING btree (id);
 
 
 --
 -- Name: related_categories_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE UNIQUE INDEX related_categories_id_uindex ON public.related_categories USING btree (id);
+CREATE UNIQUE INDEX related_categories_id_uindex ON public.related_category USING btree (id);
 
 
 --
 -- Name: related_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX related_index ON public.related_categories USING btree (id_catalog, id_category);
+CREATE INDEX related_index ON public.related_category USING btree (catalog_id, category_id);
 
 
 --
@@ -364,6 +366,13 @@ CREATE INDEX token_index ON public.sessions USING btree (token);
 
 
 --
+-- Name: user_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_index ON public.sessions USING btree (user_id);
+
+
+--
 -- Name: users_id_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -378,24 +387,10 @@ CREATE UNIQUE INDEX users_login_uindex ON public.users USING btree (login);
 
 
 --
--- Name: TABLE catalog; Type: ACL; Schema: public; Owner: postgres
+-- Name: TABLE category; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT ALL ON TABLE public.catalog TO coluser;
-
-
---
--- Name: SEQUENCE catalog_id_seq; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON SEQUENCE public.catalog_id_seq TO coluser;
-
-
---
--- Name: TABLE categories; Type: ACL; Schema: public; Owner: postgres
---
-
-GRANT ALL ON TABLE public.categories TO coluser;
+GRANT ALL ON TABLE public.category TO coluser;
 
 
 --
@@ -406,10 +401,10 @@ GRANT ALL ON SEQUENCE public.categories_id_seq TO coluser;
 
 
 --
--- Name: TABLE related_categories; Type: ACL; Schema: public; Owner: postgres
+-- Name: TABLE related_category; Type: ACL; Schema: public; Owner: postgres
 --
 
-GRANT ALL ON TABLE public.related_categories TO coluser;
+GRANT ALL ON TABLE public.related_category TO coluser;
 
 
 --
@@ -417,6 +412,13 @@ GRANT ALL ON TABLE public.related_categories TO coluser;
 --
 
 GRANT ALL ON SEQUENCE public.related_categories_id_seq TO coluser;
+
+
+--
+-- Name: TABLE sessions; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TABLE public.sessions TO coluser;
 
 
 --
