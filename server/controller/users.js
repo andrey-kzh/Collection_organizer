@@ -48,6 +48,16 @@ module.exports = {
   },
 
   async logout(req, res, next) {
+    try {
+      const session = await localStorage.getStore().get('session');
+      if (!session) throw { status: 401, message: 'Unauthorized' };
+      const sessionId = await Sessions.delete(session.id_session);
+      if (!sessionId) throw { status: 401, message: 'Session not found' };
+      res.status(200).json({ result: true });
+    } catch (e) {
+      next(err(e));
+    }
+    next();
   },
 
   async authorization(req, res, next) {
