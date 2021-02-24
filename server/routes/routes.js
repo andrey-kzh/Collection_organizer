@@ -9,17 +9,19 @@ router.use(users.authorization);
 
 router.post('/users/register', users.register);
 router.post('/users/login', users.login);
-router.post('/users/logout', users.logout);
+router.post('/users/logout', guard.mustBeAuthenticated, users.logout);
+
+// router.get('/catalog-list', catalog.getCatalogItem);
 
 router.get('/catalog', guard.mustBeAuthenticated, catalog.getCatalogItem);
-router.post('/catalog', catalog.addCatalogItem);
-router.put('/catalog', catalog.updateCatalogItem);
-router.delete('/catalog', catalog.deleteCatalogItem);
+router.post('/catalog', guard.mustBeAuthenticated, catalog.addCatalogItem);
+router.put('/catalog', guard.mustBeAuthenticated, catalog.updateCatalogItem);
+router.delete('/catalog', guard.mustBeAuthenticated, catalog.deleteCatalogItem);
 
-router.get('/category', category.getAllCategorys);
-router.post('/category', category.addCategoryItem);
-router.put('/category', category.updateCategoryItem);
-router.delete('/category', category.deleteCategoryItem);
+router.get('/category', guard.mustBeAuthenticated, category.getAllCategorys);
+router.post('/category', guard.mustBeAuthenticated, category.addCategoryItem);
+router.put('/category', guard.mustBeAuthenticated, category.updateCategoryItem);
+router.delete('/category', guard.mustBeAuthenticated, category.deleteCategoryItem);
 
 router.get('/search', search.returnSearchResult);
 
