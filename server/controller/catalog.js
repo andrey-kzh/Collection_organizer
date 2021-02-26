@@ -1,6 +1,7 @@
 const err = require('../libs/exception').errorCreator;
 const { localStorage } = require('../libs/asyncLocalStorage');
 const Catalog = require('../model/catalog');
+const RelatedCategories = require('../model/relatedCategories');
 
 module.exports = {
 
@@ -26,7 +27,8 @@ module.exports = {
       const userId = await localStorage.getStore().get('session').userId;
       if (!title || !userId) throw { status: 400, message: 'Incorrect request data' };
       const catalogId = await Catalog.insertCatalogItem(title, anons, image, userId);
-      const relatedCategoriesId = await addRelatedCategories(catalogId, categoriesId);
+      let relatedCategoriesId = await addRelatedCategories(catalogId, categoriesId);
+      if (!relatedCategoriesId) relatedCategoriesId = [];
       res.status(200).json({ ...catalogId, ...{ relatedCategories: relatedCategoriesId } });
     } catch (e) {
       next(err(e));
@@ -42,8 +44,9 @@ module.exports = {
 
       if (!id) throw { status: 400, message: 'Incorrect request data' };
       const catalogId = await Catalog.updateCatalogItem(title, anons, image, id);
-      await Catalog.deleteRelatedCategories(catalogId.id);
-      const relatedCategoriesId = await addRelatedCategories(catalogId, categoriesId);
+      await RelatedCategories.deleteRelationByCatalogId(catalogId.id);
+      let relatedCategoriesId = await addRelatedCategories(catalogId, categoriesId);
+      if (!relatedCategoriesId) relatedCategoriesId = [];
       res.status(200).json({ ...catalogId, ...{ relatedCategories: relatedCategoriesId } });
     } catch (e) {
       next(err(e));
@@ -57,8 +60,15 @@ module.exports = {
 
       if (!id) throw { status: 400, message: 'Incorrect request data' };
       const catalogId = await Catalog.deleteCatalogItem(id);
-      const relatedCategoriesId = await Catalog.deleteRelatedCategories(catalogId.id);
-      res.status(200).json({ ...catalogId, ...{ relatedCategories: relatedCategoriesId } });
+      let relatedCategoriesId = [];
+      if (catalogId) {
+        relatedCategoriesId = await RelatedCategories.deleteRelationByCatalogId(catalogId.id);
+      }
+      if (!catalogId && (relatedCategoriesId.length < 1)) {
+        res.status(200).json({ result: null });
+      } else {
+        res.status(200).json({ result: { ...catalogId, ...{ relatedCategories: relatedCategoriesId } } });
+      }
     } catch (e) {
       next(err(e));
     }

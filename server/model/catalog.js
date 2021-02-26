@@ -45,25 +45,7 @@ module.exports = {
     )
       .then((data) => data)
       .catch((error) => {
-        throw error;
+        // throw error;
       });
   },
-
-  insertRelatedCategories(dataFields) {
-    const cs = new pgp.helpers.ColumnSet(['catalog_id', 'category_id'], { table: 'related_category' });
-    return db.manyOrNone(`${pgp.helpers.insert(dataFields, cs)} RETURNING category_id`)
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
-  },
-
-  deleteRelatedCategories(catalogId) {
-    return db.manyOrNone('DELETE FROM related_category WHERE catalog_id = $1 RETURNING category_id', catalogId)
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
-  },
-
 };

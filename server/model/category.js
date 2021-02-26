@@ -34,4 +34,14 @@ module.exports = {
       });
   },
 
+  deleteCategory(id) {
+    return db.oneOrNone(
+      'DELETE FROM category WHERE id = $1 RETURNING id', id,
+    )
+      .then((data) => data)
+      .catch((error) => {
+        // throw error;
+      });
+  },
+
 };

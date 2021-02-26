@@ -1,6 +1,7 @@
 const err = require('../libs/exception').errorCreator;
 const { localStorage } = require('../libs/asyncLocalStorage');
 const Category = require('../model/category');
+const RelatedCategories = require('../model/relatedCategories');
 
 module.exports = {
 
@@ -38,6 +39,24 @@ module.exports = {
   },
 
   async deleteCategoryItem(req, res, next) {
+    try {
+      const { id } = req.body;
+
+      if (!id) throw { status: 400, message: 'Incorrect request data' };
+      const categoryId = await Category.deleteCategory(id);
+      let relatedCategoriesId = [];
+      if (categoryId) {
+        relatedCategoriesId = await RelatedCategories.deleteRelationByCategoryId(categoryId);
+      }
+      if (!categoryId && (relatedCategoriesId.length < 1)) {
+        res.status(200).json({ result: null });
+      } else {
+        res.status(200).json({ result: { ...categoryId, ...{ relatedCategories: relatedCategoriesId } } });
+      }
+    } catch (e) {
+      next(err(e));
+    }
+    next();
   },
 
 };
