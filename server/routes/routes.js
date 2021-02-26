@@ -18,7 +18,7 @@ router.post('/catalog', guard.mustBeAuthenticated, catalog.addCatalogItem);
 router.put('/catalog', guard.mustBeAuthenticated, catalog.updateCatalogItem);
 router.delete('/catalog', guard.mustBeAuthenticated, catalog.deleteCatalogItem);
 
-router.get('/category', guard.mustBeAuthenticated, category.getAllCategorys);
+router.get('/category', guard.mustBeAuthenticated, category.getAllCategories);
 router.post('/category', guard.mustBeAuthenticated, category.addCategoryItem);
 router.put('/category', guard.mustBeAuthenticated, category.updateCategoryItem);
 router.delete('/category', guard.mustBeAuthenticated, category.deleteCategoryItem);

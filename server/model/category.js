@@ -2,7 +2,7 @@ const { db } = require('../libs/connection');
 
 module.exports = {
 
-  selectAllCategorys(userId) {
+  selectAllCategories(userId) {
     return db.manyOrNone(
       'SELECT id, title FROM category WHERE user_id = $1', userId,
     )
@@ -12,7 +12,7 @@ module.exports = {
       });
   },
 
-  addNewCategory(title, userId) {
+  insertCategory(title, userId) {
     return db.oneOrNone(
       'INSERT INTO category (title, user_id) VALUES ($1, $2) RETURNING id',
       [title, userId],

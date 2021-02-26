@@ -4,7 +4,7 @@ const config = require('../config');
 
 module.exports = {
 
-  async addNewSession(userId, token) {
+  async insertSession(userId, token) {
     if (!token || !userId) return false;
     return db.oneOrNone(
       'INSERT INTO sessions (user_id, token, last_visit) VALUES ($1, $2, $3) RETURNING token',
@@ -37,7 +37,7 @@ module.exports = {
       });
   },
 
-  delete(id) {
+  deleteSession(id) {
     return db.oneOrNone(
       'DELETE FROM sessions WHERE id = $1 RETURNING id', id,
     )

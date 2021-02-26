@@ -12,7 +12,7 @@ module.exports = {
       if (name && login && password) {
         const salt = await Users.generateSalt();
         const passwordHash = await Users.generatePassword(salt, password);
-        const userId = await Users.addNewUser(name, login, passwordHash, salt);
+        const userId = await Users.insertUser(name, login, passwordHash, salt);
         res.status(200).json(userId);
       } else throw { status: 400, message: 'Incorrect request data' };
     } catch (e) {
@@ -35,7 +35,7 @@ module.exports = {
               session = await Sessions.updateLastVisit(existingSession.id);
             } else {
               const token = await Sessions.createToken(user.id);
-              session = await Sessions.addNewSession(user.id, token);
+              session = await Sessions.insertSession(user.id, token);
             }
             res.status(200).json({ token: session.token });
           } else throw { status: 401, message: 'User not found' };
@@ -51,7 +51,7 @@ module.exports = {
     try {
       const session = await localStorage.getStore().get('session');
       if (!session) throw { status: 401, message: 'Unauthorized' };
-      const id = await Sessions.delete(session.id);
+      const id = await Sessions.deleteSession(session.id);
       if (!id) throw { status: 401, message: 'Session not found' };
       res.status(200).json({ result: true });
     } catch (e) {
@@ -75,7 +75,7 @@ module.exports = {
       expires.setDate(expires.getDate() - config.sessionExpirationDays);
 
       if (new Date(session.lastVisit) < expires) {
-        await Sessions.delete(session.id);
+        await Sessions.deleteSession(session.id);
         return next();
       }
 
