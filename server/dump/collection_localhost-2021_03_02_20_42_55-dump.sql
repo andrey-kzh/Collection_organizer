@@ -26,9 +26,12 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.catalog (
     id integer NOT NULL,
-    title character varying(256),
+    user_id integer,
+    image character varying(256),
+    title text,
+    title_idx tsvector,
     anons text,
-    user_id integer
+    anons_idx tsvector
 );
 
 
@@ -238,7 +241,10 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: catalog; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.catalog (id, title, anons, user_id) FROM stdin;
+COPY public.catalog (id, user_id, image, title, title_idx, anons, anons_idx) FROM stdin;
+46	41	/img/test1.jpg	Простой запрос	'запрос':2 'прост':1	анонс для теста	'анонс':1 'тест':3
+48	41	/img/test2.jpg	Тестовый заголовок2	'заголовок2':2 'тестов':1	Тестовый анонс2	'анонс2':2 'тестов':1
+49	41	/img/test1.jpg	Запрос	'запрос':1	анонс	'анонс':1
 \.
 
 
@@ -247,10 +253,9 @@ COPY public.catalog (id, title, anons, user_id) FROM stdin;
 --
 
 COPY public.category (id, title, user_id) FROM stdin;
-4	Диски	41
-5	Кассеты	41
-6	Тест2	41
-7	Пластинки2	41
+8	Пластинки	41
+9	Диски	41
+10	Кассеты	41
 \.
 
 
@@ -259,6 +264,11 @@ COPY public.category (id, title, user_id) FROM stdin;
 --
 
 COPY public.related_category (id, catalog_id, category_id) FROM stdin;
+145	48	8
+146	48	9
+147	49	8
+148	49	9
+149	49	10
 \.
 
 
@@ -267,7 +277,7 @@ COPY public.related_category (id, catalog_id, category_id) FROM stdin;
 --
 
 COPY public.sessions (id, user_id, token, last_visit) FROM stdin;
-8	41	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJpYXQiOjE2MTQxNjk2OTV9.0KUq0bEAdNsK2qVj8xGVWH0PbQODpPDtP4w9pduQIe4	2021-02-24 13:35:55.853
+8	41	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJpYXQiOjE2MTQxNjk2OTV9.0KUq0bEAdNsK2qVj8xGVWH0PbQODpPDtP4w9pduQIe4	2021-03-02 17:37:08.312
 \.
 
 
@@ -284,21 +294,21 @@ COPY public.users (id, name, login, password, salt) FROM stdin;
 -- Name: catalog_id_catalog_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.catalog_id_catalog_seq', 1, false);
+SELECT pg_catalog.setval('public.catalog_id_catalog_seq', 49, true);
 
 
 --
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categories_id_seq', 7, true);
+SELECT pg_catalog.setval('public.categories_id_seq', 10, true);
 
 
 --
 -- Name: related_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.related_categories_id_seq', 1, false);
+SELECT pg_catalog.setval('public.related_categories_id_seq', 149, true);
 
 
 --
@@ -324,10 +334,24 @@ ALTER TABLE ONLY public.catalog
 
 
 --
+-- Name: catalog_anons_idx_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX catalog_anons_idx_index ON public.catalog USING gin (anons_idx);
+
+
+--
 -- Name: catalog_id_catalog_uindex; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE UNIQUE INDEX catalog_id_catalog_uindex ON public.catalog USING btree (id);
+
+
+--
+-- Name: catalog_title_idx_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX catalog_title_idx_index ON public.catalog USING gin (title_idx);
 
 
 --
@@ -384,6 +408,20 @@ CREATE UNIQUE INDEX users_id_uindex ON public.users USING btree (id);
 --
 
 CREATE UNIQUE INDEX users_login_uindex ON public.users USING btree (login);
+
+
+--
+-- Name: TABLE catalog; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TABLE public.catalog TO coluser;
+
+
+--
+-- Name: SEQUENCE catalog_id_catalog_seq; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public.catalog_id_catalog_seq TO coluser;
 
 
 --
