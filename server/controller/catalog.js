@@ -1,9 +1,34 @@
 const err = require('../libs/exception').errorCreator;
+const config = require('../config');
 const { localStorage } = require('../libs/asyncLocalStorage');
 const Catalog = require('../model/catalog');
 const RelatedCategories = require('../model/relatedCategories');
 
 module.exports = {
+
+  async getCatalogList(req, res, next) {
+    try {
+      const { page } = req.body;
+
+      if (!page) throw { status: 400, message: 'Incorrect request data' };
+
+      const totalItems = await Catalog.selectCatalogCount();
+      const totalPages = Math.ceil(totalItems.count / config.catalogPerPage);
+
+      if (page <= totalPages) {
+        let pageOffset = page - 1;
+        if (pageOffset < 0) pageOffset = 0;
+        const offset = pageOffset * config.catalogPerPage;
+        const catalogList = await Catalog.selectCatalogList(config.catalogPerPage, offset);
+        res.status(200).json({ totalPages, list: catalogList });
+      } else {
+        res.status(200).json({ totalPages, list: [] });
+      }
+    } catch (e) {
+      next(err(e));
+    }
+    next();
+  },
 
   async getCatalogItem(req, res, next) {
     try {
@@ -81,7 +106,7 @@ function addRelatedCategories(catalogId, categoriesId) {
   return new Promise((resolve, reject) => {
     if (catalogId && (categoriesId.length > 0)) {
       const dataFields = categoriesId.map((id) => ({ catalog_id: catalogId.id, category_id: id }));
-      resolve(Catalog.insertRelatedCategories(dataFields));
+      resolve(RelatedCategories.insertRelatedCategories(dataFields));
     }
     resolve([]);
   });
