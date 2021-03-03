@@ -1,0 +1,63 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.popup-wrap_edit-cat-item
+  display: none
+
+.edit-cat-item-form
+  padding: 20px 0 0 0
+  margin: 0
+
+.edit-cat-item-form__img-wrap
+  display: grid
+  grid-template-columns: 150px minmax(0, 1fr)
+  grid-column-gap: 40px
+  align-items: end
+  @media screen and (max-width: $mobileResolution)
+    grid-template-columns: 1fr
+
+.edit-cat-item-form__img-input
+  width: 0.1px
+  height: 0.1px
+  opacity: 0
+  position: absolute
+  z-index: -10
+
+.edit-cat-item-form__img-button
+  display: flex
+  justify-content: center
+  align-items: center
+
+.edit-cat-item-form__img
+  width: 200px
+  height: 130px
+  background-size: contain
+  background-repeat: no-repeat
+  @media screen and (max-width: $mobileResolution)
+    margin: 15px 0 0 0
+    width: calc(100vw - 60px)
+    height: calc((100vw - 60px) / 4 * 3)
+
+
+.edit-cat-item-form__submit-wrap
+  text-align: right
+  padding: 30px 0 0 0
+
+.edit-cat-item-form__input-wrap
+  margin: 20px 0 0 0
+
+.edit-cat-item-form__input-title
+  margin: 10px 0 5px 0
+
+.edit-cat-item-form__input
+  width: 100%
+  border: 1px #000000 solid
+  padding: 8px
+  box-sizing: border-box
+
+.edit-cat-item-form__textarea
+  width: 100%
+  height: 200px
+  border: 1px #000000 solid
+  padding: 8px
+  box-sizing: border-box

@@ -1,0 +1,42 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.select-category-item
+  position: relative
+  display: block
+  padding: 0 0 0 40px
+  box-sizing: border-box
+  cursor: pointer
+
+.select-category-item__title
+  text-overflow: ellipsis
+
+.select-category-item__title::before
+  content: ''
+  display: block
+  width: 30px
+  height: 30px
+  border-radius: 50%
+  border: 1px #000000 solid
+  background-color: #BDBDBD
+  position: absolute
+  left: 0
+  top: -10px
+
+.select-category-item__input
+  display: none
+
+.select-category-item__input:checked+.select-category-item__title::before
+  content: ''
+  display: block
+  width: 30px
+  height: 30px
+  border-radius: 50%
+  border: 1px #000000 solid
+  background: url('data:image/svg+xml;utf8, <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.73765 5.84899L10.23 19.1026L14.38 0.343879" stroke="white"/></svg>')
+  background-color: #000000
+  background-repeat: no-repeat
+  background-position: center
+  position: absolute
+  left: 0
+  top: -10px
