@@ -1,0 +1,24 @@
+@import ../../css/mixins.sass
+@import ../../css/variables.sass
+
+.setup-category-edit
+  margin: 20px 0 0 0
+
+.setup-category-edit__title-input
+  width: 100%
+  min-width: 320px
+  padding: 8px
+  box-sizing: border-box
+  @media screen and (max-width: $mobileResolution)
+    min-width: auto
+
+.setup-category-edit__buttons-wrap
+  margin: 20px 0 0 0
+  //display: grid
+  //grid-template-columns: minmax(0, 1fr) minmax(0, 1fr)
+  //grid-column-gap: 20px
+  display: flex
+  justify-content: space-between
+
+.popup-wrap_setup-categorys
+  display: none
