@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const router = require('./routes/routes');
 const { localStorage } = require('./libs/asyncLocalStorage');
 
 const app = express();
+app.use(cors());
 
 app.use((req, res, next) => {
   localStorage.enterWith(new Map());
