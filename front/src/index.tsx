@@ -1,16 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import {MobXProvider} from "./store";
 
-//import { store } from './store';
-import { IndexPage } from './pages/index/';
-
+import {IndexPage} from './pages/index/';
 import './css/style.sass';
 
 const App: React.FC = () => {
     return (
-    <div className="content">
-    <IndexPage/>
-    </div>
+        <div className="content">
+            <MobXProvider>
+                <IndexPage/>
+            </MobXProvider>
+        </div>
     )
 }
 
