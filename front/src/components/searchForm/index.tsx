@@ -5,8 +5,7 @@ import {store} from '../../store'
 
 export const SearchForm: React.FC = observer(() => {
 
-    const {searchStore} = React.useContext(store)
-    const {query, setQuery, find} = searchStore
+    const {searchStore: {query, setQuery, find}} = React.useContext(store)
 
     return (
         <div className="search-form-wrap">
