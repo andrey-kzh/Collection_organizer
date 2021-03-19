@@ -3,10 +3,9 @@ import './style.sass'
 
 interface IProps {
     name:String,
-    //link:String,
-    //onClick():void
+    link?:String,
 }
 
-export const NavLink:React.FC<IProps> = ({name}) => {
-    return <a className="nav-link" href="#">{name}</a>
+export const NavLink:React.FC<IProps> = ({name, link}) => {
+    return <a className="nav-link" href={`${link}`}>{name}</a>
 }

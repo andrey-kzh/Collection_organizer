@@ -1,17 +1,21 @@
 import * as React from "react";
 import {searchStore} from "./searchStore";
-import {SearchStoreInterface} from "./searchStore"
+import {ISearchStore} from "./searchStore"
+import {authStore} from "./authStore"
+import {IAuthStore} from "./authStore"
 
 interface State {
-    searchStore: SearchStoreInterface;
+    searchStore: ISearchStore;
+    authStore: IAuthStore;
 }
 
 interface Props {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 const state = {
-    searchStore: searchStore
+    searchStore: searchStore,
+    authStore: authStore,
 };
 
 export const store = React.createContext<State>(state);

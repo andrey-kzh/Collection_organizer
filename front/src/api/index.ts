@@ -1,9 +1,12 @@
 const axios = require('axios');
+import {getTokenFromStorage} from "../libs/localStorage";
 
 interface IApi {
     urlRoot: String,
     optionsDefault: {},
     requestWithToken: Function,
+    login: Function,
+    userCheckAuth: Function,
     findCatalogItems: Function
 }
 
@@ -11,7 +14,7 @@ interface IOptions {
     method: string,
     url: string,
     data?: object
-    responseType?:string,
+    responseType?: string,
     headers: {
         Authorization?: string,
         'Content-Type': string,
@@ -23,11 +26,11 @@ class Api implements IApi {
     urlRoot = 'http://localhost:3000/api';
     optionsDefault = {};
 
-    async requestWithToken(options:{[key:string]:any}) {
+    async requestWithToken(options: { [key: string]: any }) {
         try {
 
             options.url = `${this.urlRoot}${options.url}`;
-            let accessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJpYXQiOjE2MTQxNjk2OTV9.0KUq0bEAdNsK2qVj8xGVWH0PbQODpPDtP4w9pduQIe4';
+            let accessToken = getTokenFromStorage();
 
             if (!options.headers) options.headers = {};
             options.headers = {'Content-Type': 'application/json'};
@@ -38,6 +41,31 @@ class Api implements IApi {
             console.log(e.message)
         }
     }
+
+
+    async login(login: string, password: string) {
+        const options = {
+            url: `${this.urlRoot}/users/login/`,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                login: login,
+                password: password
+            }
+        };
+        const response = await axios(<IOptions>{...this.optionsDefault, ...options});
+        return response.data;
+    }
+
+    async userCheckAuth() {
+        const options = {
+            url: `/users/auth/`,
+            method: 'GET',
+        };
+        const response = await this.requestWithToken(options);
+        return response.data
+    }
+
 
     async findCatalogItems(query: string, categories: number[]) {
 

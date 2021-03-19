@@ -17,7 +17,6 @@ export const SearchForm: React.FC = observer(() => {
 
                     {console.log(query)}
 
-
                 </div>
             </form>
         </div>

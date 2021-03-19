@@ -60,6 +60,17 @@ module.exports = {
     next();
   },
 
+  async checkAuth(req, res, next) {
+    try {
+      const session = await localStorage.getStore().get('session');
+      if (!session) res.status(200).json({ result: false });
+      res.status(200).json({ result: true });
+    } catch (e) {
+      next(err(e));
+    }
+    next();
+  },
+
   async authorization(req, res, next) {
     try {
       const header = req.get('Authorization');

@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {api} from "../api";
 
-export interface SearchStoreInterface {
+export interface ISearchStore {
     query: string;
     computedQuery: Function;
     setQuery: Function;

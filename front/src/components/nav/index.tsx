@@ -1,20 +1,34 @@
 import * as React from "react";
 import './style.sass'
+import {getAuthFromStorage} from "../../libs/localStorage";
 
-import {NavLinkSearch} from "../navLinkSearch";
 import {NavButtonSearch} from "../navButtonSearch";
 import {NavLink} from "../navLink";
 import {NavButton} from "../navButton";
 
-export const Nav:React.FC = () => {
+export const Nav: React.FC = () => {
 
-    return(
+    const isAuth = getAuthFromStorage();
+
+    const returnMenu = () => {
+        if (isAuth) {
+            return <>
+                <NavButton name={'Добавить'}/>
+                <NavLink name={'Настройки'} link={'/setup/'}/>
+                <NavButton name={'Выход'}/>
+            </>
+        }
+        return <>
+            <NavLink name={'Войти'} link={'/auth/'}/>
+        </>
+    }
+
+
+    return (
         <div className="nav">
             <NavButtonSearch/>
             <div className="nav-wrap">
-                <NavButton name={'Добавить'}/>
-                <NavLink name={'Настройки'}/>
-                <NavButton name={'Выход'}/>
+                {returnMenu()}
             </div>
         </div>
     )

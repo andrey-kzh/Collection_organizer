@@ -2,11 +2,10 @@ import * as React from "react";
 import './style.sass'
 
 interface IProps {
-    name:String,
-    //link:String,
-    //onClick():void
+    name: String,
+    callback?: () => void,
 }
 
-export const NavButton:React.FC<IProps> = ({name}) => {
-    return <button className="nav-button">{name}</button>
+export const NavButton: React.FC<IProps> = ({name, callback}) => {
+    return <button onClick={() => callback()} className="nav-button">{name}</button>
 }
