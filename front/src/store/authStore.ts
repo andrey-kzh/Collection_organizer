@@ -1,6 +1,6 @@
 import {makeAutoObservable, runInAction} from "mobx";
 import {api} from "../api";
-import {saveTokenToStorage, saveAuthToStorage, clearAuthFromStorage} from "../libs/localStorage";
+import {saveTokenToStorage, clearTokenFromStorage} from "../libs/localStorage";
 
 export interface IAuthStore {
     login: string;
@@ -26,17 +26,15 @@ export const authStore = makeAutoObservable({
         const result = await api.login(authStore.login, authStore.password);
         if (result.token) {
             saveTokenToStorage(result.token);
-            saveAuthToStorage(true)
             runInAction(() => authStore.isAuth = true);
-        }
+        } else clearTokenFromStorage()
     },
     async authRequest() {
         const isAuth = await api.userCheckAuth();
         if (isAuth.result) {
-            saveAuthToStorage(true)
             runInAction(() => authStore.isAuth = true)
         } else {
-            clearAuthFromStorage()
+            clearTokenFromStorage()
             runInAction(() => authStore.isAuth = false)
         }
     }

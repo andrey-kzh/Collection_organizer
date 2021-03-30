@@ -10,7 +10,7 @@ router.use(users.authorization);
 router.post('/users/register', users.register);
 router.post('/users/login', users.login);
 router.post('/users/logout', guard.mustBeAuthenticated, users.logout);
-router.get('/users/auth', guard.mustBeAuthenticated, users.checkAuth);
+router.get('/users/auth', users.checkAuth);
 
 router.get('/catalog-list', catalog.getCatalogList);
 

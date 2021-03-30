@@ -63,9 +63,11 @@ module.exports = {
   async checkAuth(req, res, next) {
     try {
       const session = await localStorage.getStore().get('session');
-      if (!session) res.status(200).json({ result: false });
-      res.status(200).json({ result: true });
-    } catch (e) {
+      if (session) {
+        res.status(200).json({result: true});
+      } else res.status(200).json({result: false})
+    }
+     catch (e) {
       next(err(e));
     }
     next();
