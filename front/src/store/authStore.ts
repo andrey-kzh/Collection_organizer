@@ -9,6 +9,7 @@ export interface IAuthStore {
     setLogin: Function;
     setPassword: Function;
     loginRequest: Function;
+    logoutRequest: Function;
     authRequest: Function;
 }
 
@@ -29,9 +30,17 @@ export const authStore = makeAutoObservable({
             runInAction(() => authStore.isAuth = true);
         } else clearTokenFromStorage()
     },
+    async logoutRequest() {
+        const response = await api.logout();
+        if (response.result === true) {
+            clearTokenFromStorage()
+            runInAction(() => authStore.isAuth = false)
+        }
+        console.log(response.result)
+    },
     async authRequest() {
         const isAuth = await api.userCheckAuth();
-        if (isAuth.result) {
+        if (isAuth) {
             runInAction(() => authStore.isAuth = true)
         } else {
             clearTokenFromStorage()

@@ -57,15 +57,28 @@ class Api implements IApi {
         return response.data;
     }
 
+    async logout() {
+        const options = {
+            url: `/users/logout/`,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            data: {}
+        };
+        const response = await this.requestWithToken(options);
+        return response.data;
+    }
+
     async userCheckAuth() {
         const options = {
             url: `/users/auth/`,
             method: 'GET',
         };
         const response = await this.requestWithToken(options);
-        return response.data
+        if (response !== undefined) {
+            return response.data.result
+        }
+        return false
     }
-
 
     async findCatalogItems(query: string, categories: number[]) {
 

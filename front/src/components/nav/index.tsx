@@ -8,14 +8,14 @@ import {NavButton} from "../navButton";
 
 export const Nav: React.FC = observer(() => {
 
-        const {authStore: {isAuth}} = React.useContext(store);
+        const {authStore: {isAuth, logoutRequest}} = React.useContext(store);
 
         const renderMenu = () => {
             if (isAuth) {
                 return <>
                     <NavButton name={'Добавить'}/>
                     <NavLink name={'Настройки'} link={'/setup/'}/>
-                    <NavButton name={'Выход'}/>
+                    <NavButton callback={logoutRequest} name={'Выход'}/>
                 </>
             }
             return <NavLink name={'Войти'} link={'/auth/'}/>
