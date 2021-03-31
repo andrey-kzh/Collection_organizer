@@ -53,7 +53,7 @@ module.exports = {
       if (!session) throw { status: 401, message: 'Unauthorized' };
       const id = await Sessions.deleteSession(session.id);
       if (!id) throw { status: 401, message: 'Session not found' };
-      res.status(200).json({ result: true });
+      res.status(200).json({ isLogout: true });
     } catch (e) {
       next(err(e));
     }
@@ -64,8 +64,8 @@ module.exports = {
     try {
       const session = await localStorage.getStore().get('session');
       if (session) {
-        res.status(200).json({result: true});
-      } else res.status(200).json({result: false})
+        res.status(200).json({isAuth: true});
+      } else res.status(200).json({isAuth: false})
     }
      catch (e) {
       next(err(e));

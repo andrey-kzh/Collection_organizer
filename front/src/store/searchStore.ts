@@ -17,7 +17,7 @@ export const searchStore = makeAutoObservable({
         searchStore.query = query;
     },
     async find() {
-        const result = await api.findCatalogItems(searchStore.query, [8])
-        console.log(result)
+        const res = await api.findCatalogItems(searchStore.query, [8])
+        console.log(res)
     }
 });

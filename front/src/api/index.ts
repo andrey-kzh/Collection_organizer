@@ -23,12 +23,17 @@ interface IOptions {
 
 class Api implements IApi {
 
+    constructor() {
+        axios.interceptors.response.use((response: any) => response, (error: any) => {
+            return Promise.reject(error.response)
+        });
+    }
+
     urlRoot = 'http://localhost:3000/api';
     optionsDefault = {};
 
     async requestWithToken(options: { [key: string]: any }) {
         try {
-
             options.url = `${this.urlRoot}${options.url}`;
             let accessToken = getTokenFromStorage();
 
@@ -36,7 +41,8 @@ class Api implements IApi {
             options.headers = {'Content-Type': 'application/json'};
             if (accessToken) options.headers.Authorization = `Bearer ${accessToken}`;
 
-            return await axios(<IOptions>{...this.optionsDefault, ...options});
+            return await axios(<IOptions>{...this.optionsDefault, ...options})
+                .catch((error: any) => error);
         } catch (e) {
             console.log(e.message)
         }
@@ -53,8 +59,9 @@ class Api implements IApi {
                 password: password
             }
         };
-        const response = await axios(<IOptions>{...this.optionsDefault, ...options});
-        return response.data;
+        const res = await axios(<IOptions>{...this.optionsDefault, ...options})
+            .catch((error: any) => error);
+        return res;
     }
 
     async logout() {
@@ -64,8 +71,8 @@ class Api implements IApi {
             headers: {'Content-Type': 'application/json'},
             data: {}
         };
-        const response = await this.requestWithToken(options);
-        return response.data;
+        const res = await this.requestWithToken(options)
+        return res;
     }
 
     async userCheckAuth() {
@@ -73,9 +80,9 @@ class Api implements IApi {
             url: `/users/auth/`,
             method: 'GET',
         };
-        const response = await this.requestWithToken(options);
-        if (response !== undefined) {
-            return response.data.result
+        const res = await this.requestWithToken(options)
+        if (res !== undefined) {
+            return res
         }
         return false
     }
@@ -86,8 +93,8 @@ class Api implements IApi {
             url: `/search?search=${query}&categories=${categories}`,
             method: 'GET',
         };
-        const response = await this.requestWithToken(options);
-        return response.data
+        const res = await this.requestWithToken(options);
+        return res
     }
 }
 

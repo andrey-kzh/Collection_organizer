@@ -8,7 +8,7 @@ import {useEffect} from "react";
 
 export const LoginForm: React.FC = observer(() => {
 
-    const {authStore: {isAuth, login, setLogin, password, setPassword, loginRequest}} = React.useContext(store)
+    const {authStore: {isAuth, login, setLogin, password, setPassword, errorLogin, loginRequest}} = React.useContext(store)
 
     const history = useHistory();
     const location = useLocation();
@@ -24,6 +24,8 @@ export const LoginForm: React.FC = observer(() => {
         <div className="login-form-wrap">
 
             <h1>Авторизация</h1>
+
+            <div className="login-form__error">{errorLogin}</div>
 
             <form onSubmit={(e) => e.preventDefault()} className="login-form">
 
