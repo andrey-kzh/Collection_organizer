@@ -49,9 +49,9 @@ module.exports = {
         relatedCategoriesId = await RelatedCategories.deleteRelationByCategoryId(categoryId);
       }
       if (!categoryId && (relatedCategoriesId.length < 1)) {
-        res.status(200).json({ result: null });
+        res.status(200).json({ id: null });
       } else {
-        res.status(200).json({ result: { ...categoryId, ...{ relatedCategories: relatedCategoriesId } } });
+        res.status(200).json({ ...categoryId, ...{ relatedCategories: relatedCategoriesId } });
       }
     } catch (e) {
       next(err(e));

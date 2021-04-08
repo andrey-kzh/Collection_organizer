@@ -96,6 +96,56 @@ class Api implements IApi {
         const res = await this.requestWithToken(options);
         return res
     }
+
+    async addCategoryItem(title: string) {
+        const options = {
+            url: `/category/`,
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                title: title
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async getAllCategories() {
+        const options = {
+            url: `/category/`,
+            method: 'GET',
+        };
+        const res = await this.requestWithToken(options);
+        return res
+    }
+
+    async updateCategoryItem(id: number, title: string) {
+        const options = {
+            url: `/category/`,
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                id: id,
+                title: title
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async deleteCategoryItem(id: number) {
+        const options = {
+            url: `/category/`,
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            data: {
+                id: id,
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
 }
 
 export const api = new Api();

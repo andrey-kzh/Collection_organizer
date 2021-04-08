@@ -4,7 +4,7 @@ import './style.sass'
 interface IProps {
     name: string,
     className: string,
-    callback: Function,
+    callback?: Function,
 }
 
 export const Button: React.FC<IProps> = ({name, className, callback}) => {
