@@ -11,7 +11,9 @@ export const AddNewCategoryForm: React.FC = observer(() => {
     return (
         <div className="add-category-form-wrap">
             <form onSubmit={(e) => e.preventDefault()} className="add-category-form">
+                {/*
                 <div className="add-category-form__header">Добавить категорию</div>
+                */}
                 <div className="add-category-form__input-wrap">
 
                     <input
