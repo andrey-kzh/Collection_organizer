@@ -2,6 +2,7 @@ import * as React from "react";
 import './style.sass'
 import {observer} from "mobx-react";
 import {store} from '../../store'
+import {Categories} from "../categories";
 
 export const SearchForm: React.FC = observer(() => {
 
@@ -14,6 +15,8 @@ export const SearchForm: React.FC = observer(() => {
                     <input onChange={(e) => setQuery(e.target.value)} value={query}
                            className="search-form__input" type="text" name="title" placeholder="Название"/>
                     <button onClick={() => find()} className="search-form__button" type="submit">Найти</button>
+
+                    <Categories/>
 
                     {console.log(query)}
 

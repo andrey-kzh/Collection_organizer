@@ -1,5 +1,5 @@
 const axios = require('axios');
-import {getTokenFromStorage} from "../libs/localStorage";
+import { getTokenFromStorage } from "../libs/localStorage";
 
 interface IApi {
     urlRoot: String,
@@ -38,10 +38,10 @@ class Api implements IApi {
             let accessToken = getTokenFromStorage();
 
             if (!options.headers) options.headers = {};
-            options.headers = {'Content-Type': 'application/json'};
+            options.headers = { 'Content-Type': 'application/json' };
             if (accessToken) options.headers.Authorization = `Bearer ${accessToken}`;
 
-            return await axios(<IOptions>{...this.optionsDefault, ...options})
+            return await axios(<IOptions>{ ...this.optionsDefault, ...options })
                 .catch((error: any) => error);
         } catch (e) {
             console.log(e.message)
@@ -53,13 +53,13 @@ class Api implements IApi {
         const options = {
             url: `${this.urlRoot}/users/login/`,
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             data: {
                 login: login,
                 password: password
             }
         };
-        const res = await axios(<IOptions>{...this.optionsDefault, ...options})
+        const res = await axios(<IOptions>{ ...this.optionsDefault, ...options })
             .catch((error: any) => error);
         return res;
     }
@@ -68,7 +68,7 @@ class Api implements IApi {
         const options = {
             url: `/users/logout/`,
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             data: {}
         };
         const res = await this.requestWithToken(options)
@@ -101,7 +101,7 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             data: {
                 title: title
             }
@@ -123,7 +123,7 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             data: {
                 id: id,
                 title: title
@@ -137,7 +137,7 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'DELETE',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             data: {
                 id: id,
             }

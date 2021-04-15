@@ -10,9 +10,7 @@ export interface ICategoriesStore {
 
 
 export const categoriesStore = makeAutoObservable({
-    
     categories: null,
-    
     async getAllCategories() {
         const res = await api.getAllCategories();
         if (res.status === 200) {

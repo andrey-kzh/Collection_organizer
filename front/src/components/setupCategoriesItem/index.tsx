@@ -1,6 +1,6 @@
 import * as React from "react";
 import './style.sass'
-import {Button} from "../button";
+import { Button } from "../button";
 
 interface IProps {
     id: number,
@@ -8,14 +8,14 @@ interface IProps {
     openEditWindow?: Function
 }
 
-export const SetupCategoriesItem: React.FC<IProps> = React.memo(({id, title, openEditWindow}) => {
+export const SetupCategoriesItem: React.FC<IProps> = React.memo(({ id, title, openEditWindow }) => {
     return (
         <div className="setup-categorys__item">
             <span className="setup-categorys__header">{title}</span>
             <Button
                 name="Редактировать"
                 className="button_setup-categorys-item"
-                callback={openEditWindow}/>
+                callback={openEditWindow} />
         </div>
     )
 

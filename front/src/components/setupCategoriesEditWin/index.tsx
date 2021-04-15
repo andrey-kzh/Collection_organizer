@@ -11,8 +11,9 @@ interface IProps {
 
 export const SetupCategoriesEditWin: React.FC = observer(() => {
 
-    // сохранить удалить
     const {setupStore: {editWindow: {isOpen, title}, setEditWindow, updateCategoryItem, deleteCategoryItem}} = React.useContext(store)
+
+    console.log('1')
 
     return (
         isOpen && <Popup
