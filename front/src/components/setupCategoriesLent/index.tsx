@@ -8,7 +8,7 @@ import {store} from "../../store";
 
 export const SetupCategoriesLent: React.FC = observer(() => {
 
-    const {setupStore: {categories, getAllCategories, setEditWindow}} = React.useContext(store)
+    const { categoriesStore: { categories, getAllCategories }, setupStore: { setEditWindow }} = React.useContext(store)
 
     useEffect(() => {
         if (categories === null) {

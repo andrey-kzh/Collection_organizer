@@ -4,13 +4,13 @@ import { api } from "../api";
 export interface ISearchStore {
     query: string;
     setQuery: Function;
-    isOpenCategory: boolean;
-    setIsOpenCategory: Function;
-    selectdedCategories: [number];
+    isOpenCategoriesSelector: boolean;
+    setIsOpenCategoriesSelector: Function;
+    selectdedCategories: number[];
     addSelectdedCategories: Function;
     delSelectdedCategories: Function;
     find: Function;
-    computedQuery: Function;
+    //computedQuery: Function;
 }
 
 export const searchStore = makeAutoObservable({
@@ -18,9 +18,9 @@ export const searchStore = makeAutoObservable({
     setQuery(query: string): void {
         searchStore.query = query;
     },
-    isOpenCategory: false,
-    setIsOpenCategory(isOpen: boolean) {
-        runInAction(() => searchStore.isOpenCategory = isOpen)
+    isOpenCategoriesSelector: false,
+    setIsOpenCategoriesSelector(isOpen: boolean) {
+        runInAction(() => searchStore.isOpenCategoriesSelector = isOpen)
     },
     selectdedCategories: [],
     addSelectdedCategories(categoryId: number) {

@@ -2,12 +2,10 @@ import {makeAutoObservable, runInAction} from "mobx";
 import {mapCategories} from "../libs/mapCategories";
 import {api} from "../api";
 
-
 export interface ICategoriesStore {
     categories: { [index: string]: any };
     getAllCategories: Function;
 }
-
 
 export const categoriesStore = makeAutoObservable({
     categories: null,

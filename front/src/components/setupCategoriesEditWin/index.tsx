@@ -13,8 +13,6 @@ export const SetupCategoriesEditWin: React.FC = observer(() => {
 
     const {setupStore: {editWindow: {isOpen, title}, setEditWindow, updateCategoryItem, deleteCategoryItem}} = React.useContext(store)
 
-    console.log('1')
-
     return (
         isOpen && <Popup
             closeCallback={() => setEditWindow({isOpen: false, id: null, title: ''})}

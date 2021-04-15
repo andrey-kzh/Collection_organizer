@@ -10,21 +10,23 @@ export const Categories: React.FC = observer(() => {
 
   const {
     categoriesStore: { categories },
-    searchStore: { setIsOpenCategory, selectdedCategories, delSelectdedCategories } } = React.useContext(store)
+    searchStore: { setIsOpenCategoriesSelector, selectdedCategories, delSelectdedCategories } } = React.useContext(store)
 
   const renderCategories = () => {
     return selectdedCategories.map((categoryId: number) => {
-      return <CategoriesItem
-        key={categories.items[categoryId].id}
-        title={categories.items[categoryId].title}
-        delCallback={() => delSelectdedCategories(categoryId)} />
+      if (categories.list.indexOf(categoryId) !== -1) {
+        return <CategoriesItem
+          key={categories.items[categoryId].id}
+          title={categories.items[categoryId].title}
+          delCallback={() => delSelectdedCategories(categoryId)} />
+      }
     })
   }
 
   return (
     <>
       <div className="categorys">
-        <CategoriesAddButton callback={() => setIsOpenCategory(true)} />
+        <CategoriesAddButton callback={() => setIsOpenCategoriesSelector(true)} />
         <div className="categorys-items-wrap">
           {renderCategories()}
         </div>

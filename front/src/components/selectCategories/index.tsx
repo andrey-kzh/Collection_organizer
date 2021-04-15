@@ -10,14 +10,14 @@ export const SelectCategories: React.FC = observer(() => {
 
     const {
         categoriesStore: { categories, getAllCategories },
-        searchStore: { isOpenCategory, setIsOpenCategory, selectdedCategories, addSelectdedCategories, delSelectdedCategories }
+        searchStore: { isOpenCategoriesSelector, setIsOpenCategoriesSelector, selectdedCategories, addSelectdedCategories, delSelectdedCategories }
     } = React.useContext(store)
 
     useEffect(() => {
         if (categories === null) {
             getAllCategories()
         }
-    })
+    },[])
 
     if (categories === null) {
         return <div>Loading</div>
@@ -25,21 +25,23 @@ export const SelectCategories: React.FC = observer(() => {
 
 
     const renderCategories = () => {
-        let active
+        let isActive
         return categories.list.map((id: number) => {
-            (selectdedCategories.indexOf(id) !== -1) ? active = true : active = false
-            return <SelectCategoriesItem
-                key={id}
-                isActive = {active}
-                title={`${categories.items[id].title}`}
-                addCallback={() => addSelectdedCategories(id)}
-                delCallback={() => delSelectdedCategories(id)} />
+            if (categories.list.indexOf(id) !== -1) {
+                (selectdedCategories.indexOf(id) !== -1) ? isActive = true : isActive = false
+                return <SelectCategoriesItem
+                    key={id}
+                    isActive={isActive}
+                    title={`${categories.items[id].title}`}
+                    addCallback={() => addSelectdedCategories(id)}
+                    delCallback={() => delSelectdedCategories(id)} />
+            }
         })
     }
 
     return (
-        isOpenCategory &&
-        <Popup className='' closeCallback={() => setIsOpenCategory(false)}>
+        isOpenCategoriesSelector &&
+        <Popup className='' closeCallback={() => setIsOpenCategoriesSelector(false)}>
             <div className="select-category-header">Категории</div>
             <div className="select-category select-category_none">
                 {renderCategories()}
