@@ -4,8 +4,6 @@ import { api } from "../api";
 export interface ISearchStore {
     query: string;
     setQuery: Function;
-    isOpenCategoriesSelector: boolean;
-    setIsOpenCategoriesSelector: Function;
     selectdedCategories: number[];
     addSelectdedCategories: Function;
     delSelectdedCategories: Function;
@@ -17,10 +15,6 @@ export const searchStore = makeAutoObservable({
     query: '',
     setQuery(query: string): void {
         searchStore.query = query;
-    },
-    isOpenCategoriesSelector: false,
-    setIsOpenCategoriesSelector(isOpen: boolean) {
-        runInAction(() => searchStore.isOpenCategoriesSelector = isOpen)
     },
     selectdedCategories: [],
     addSelectdedCategories(categoryId: number) {

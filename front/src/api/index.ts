@@ -37,8 +37,10 @@ class Api implements IApi {
             options.url = `${this.urlRoot}${options.url}`;
             let accessToken = getTokenFromStorage();
 
-            if (!options.headers) options.headers = {};
-            options.headers = { 'Content-Type': 'application/json' };
+            if (!options.headers) {
+                options.headers = {};
+                options.headers = { 'Content-Type': 'application/json' };
+            }
             if (accessToken) options.headers.Authorization = `Bearer ${accessToken}`;
 
             return await axios(<IOptions>{ ...this.optionsDefault, ...options })
@@ -141,6 +143,45 @@ class Api implements IApi {
             data: {
                 id: id,
             }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async addCatalogItem(title: string, anons: string, img: File | string, relatedCategories: number[]) {
+
+        let url = ''
+        if ((typeof (img) !== 'string') && img.type) {
+            const resFile = await this.uploadOneFile(img, `catalog-image`, `/catalog/upload/`)
+            url = resFile.data.url
+        }
+        if ((typeof (img) === 'string')) url = img
+
+        const options = {
+            url: `/catalog/`,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            data: {
+                title: title,
+                anons: anons,
+                image: url,
+                categoriesId: relatedCategories,
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async uploadOneFile(file: File, field: string, url: string) {
+
+        let data = new FormData();
+        data.append(field, file)
+
+        const options = {
+            url: url,
+            method: 'POST',
+            headers: { 'Content-Type': 'multipart/form-data' },
+            data: data
         };
         const res = await this.requestWithToken(options)
         return res;

@@ -7,12 +7,15 @@ import {setupStore} from "./setupStore"
 import {ISetupStore} from "./setupStore"
 import {categoriesStore} from "./categoriesStore"
 import {ICategoriesStore} from "./categoriesStore"
+import {catalogStore} from "./catalogStore"
+import {ICatalogStore} from "./catalogStore"
 
 interface State {
     searchStore: ISearchStore;
     authStore: IAuthStore;
     setupStore: ISetupStore;
     categoriesStore: ICategoriesStore;
+    catalogStore: ICatalogStore;
 }
 
 interface Props {
@@ -24,6 +27,7 @@ const state = {
     authStore: authStore,
     setupStore: setupStore,
     categoriesStore: categoriesStore,
+    catalogStore: catalogStore,
 };
 
 export const store = React.createContext<State>(state);

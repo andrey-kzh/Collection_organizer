@@ -6,11 +6,15 @@ import { CategoriesAddButton } from "../categoriesAddButton";
 import { CategoriesItem } from "../categoriesItem";
 import { SelectCategories } from "../selectCategories"
 
-export const Categories: React.FC = observer(() => {
+interface IProps {
+  selectdedCategories: number[],
+  delSelectdedCategories: Function
+  addSelectdedCategories: Function
+}
 
-  const {
-    categoriesStore: { categories },
-    searchStore: { setIsOpenCategoriesSelector, selectdedCategories, delSelectdedCategories } } = React.useContext(store)
+export const Categories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories }) => {
+
+  const {categoriesStore: { categories, setIsOpenCategoriesSelector }} = React.useContext(store)
 
   const renderCategories = () => {
     return selectdedCategories.map((categoryId: number) => {
@@ -32,7 +36,11 @@ export const Categories: React.FC = observer(() => {
         </div>
       </div>
 
-      <SelectCategories />
+      <SelectCategories
+          selectdedCategories = {selectdedCategories}
+          addSelectdedCategories ={addSelectdedCategories}
+          delSelectdedCategories={delSelectdedCategories} />
+      
     </>
   )
 })

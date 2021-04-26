@@ -6,12 +6,16 @@ import { store } from '../../store';
 import { SelectCategoriesItem } from '../selectCategoriesItem'
 import { Popup } from '../popup'
 
-export const SelectCategories: React.FC = observer(() => {
+interface IProps {
+    selectdedCategories: number[],
+    delSelectdedCategories: Function
+    addSelectdedCategories: Function
+  }
+
+export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories }) => {
 
     const {
-        categoriesStore: { categories, getAllCategories },
-        searchStore: { isOpenCategoriesSelector, setIsOpenCategoriesSelector, selectdedCategories, addSelectdedCategories, delSelectdedCategories }
-    } = React.useContext(store)
+        categoriesStore: { categories, getAllCategories, isOpenCategoriesSelector, setIsOpenCategoriesSelector }} = React.useContext(store)
 
     useEffect(() => {
         if (categories === null) {

@@ -6,7 +6,7 @@ import {SetupCategoriesEditWin} from "../setupCategoriesEditWin";
 import {useEffect} from "react";
 import {store} from "../../store";
 
-export const SetupCategoriesLent: React.FC = observer(() => {
+export const SetupCategories: React.FC = observer(() => {
 
     const { categoriesStore: { categories, getAllCategories }, setupStore: { setEditWindow }} = React.useContext(store)
 

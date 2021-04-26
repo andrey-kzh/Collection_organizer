@@ -100,6 +100,15 @@ module.exports = {
     next();
   },
 
+  async uploadImage(req, res, next) {
+    try {
+      res.status(200).json({ url: `/${req.file.path}` });
+    } catch (e) {
+      next(err(e));
+    }
+    next();
+  },
+
 };
 
 function addRelatedCategories(catalogId, categoriesId) {
@@ -110,4 +119,4 @@ function addRelatedCategories(catalogId, categoriesId) {
     }
     resolve([]);
   });
-}
+};
