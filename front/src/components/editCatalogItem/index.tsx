@@ -9,7 +9,7 @@ import { Categories } from "../categories";
 export const EditCatalogItem: React.FC = observer(() => {
 
     const { catalogStore: { editWindow: { isOpen, title, anons, relatedCategories, previewImg },
-        addCatalogItem, setEditWindow, addRelatedCategories, delRelatedCategories } } = React.useContext(store)
+        saveCatalogItem, setEditWindow, addRelatedCategories, delRelatedCategories } } = React.useContext(store)
 
 
     const fileInput = React.useRef(null);
@@ -70,7 +70,7 @@ export const EditCatalogItem: React.FC = observer(() => {
                     delSelectdedCategories={delRelatedCategories} />
 
                 <div className="edit-cat-item-form__submit-wrap">
-                    <button onClick={() => addCatalogItem()} className="button">Сохранить</button>
+                    <button onClick={() => saveCatalogItem()} className="button">Сохранить</button>
                 </div>
 
             </form>

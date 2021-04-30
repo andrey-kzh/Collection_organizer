@@ -1,7 +1,12 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import { mapCatalog } from "../libs/mapCatalog"
 import { api } from "../api";
 
 export interface ICatalogStore {
+    catalog: { [index: string]: any },
+    totalPages: number,
+    currentPage: number,
+    getCatalogList: Function,
     editWindow: {
         isOpen: boolean,
         catalogId: number,
@@ -14,10 +19,28 @@ export interface ICatalogStore {
     setEditWindow: Function,
     addRelatedCategories: Function,
     delRelatedCategories: Function,
-    addCatalogItem: Function
+    saveCatalogItem: Function,
+    addCatalogItem: Function,
+    updateCatalogItem: Function,
+    delCatalogItem: Function,
+    deleteId: number,
+    setDeleteId: Function,
 }
 
 export const catalogStore = makeAutoObservable({
+
+    catalog: null,
+    totalPages: null,
+    currentPage: 1,
+    async getCatalogList(currentPage = 1) {
+        const res = await api.getCatalogList(currentPage)
+        runInAction(() => {
+            catalogStore.catalog = mapCatalog(res.data.list)
+            catalogStore.totalPages = res.data.totalPages
+            catalogStore.currentPage = currentPage
+        })
+        console.log(mapCatalog(res.data.list))
+    },
     editWindow: {
         isOpen: false,
         catalogId: null,
@@ -63,6 +86,30 @@ export const catalogStore = makeAutoObservable({
         runInAction(() => catalogStore.editWindow.relatedCategories.splice(
             catalogStore.editWindow.relatedCategories.indexOf(categoryId), 1))
     },
+    saveCatalogItem() {
+        if (!catalogStore.editWindow.catalogId) {
+            catalogStore.addCatalogItem()
+        }
+        else catalogStore.updateCatalogItem()
+    },
+    async updateCatalogItem() {
+        const res = await api.updCatalogItem(
+            catalogStore.editWindow.catalogId,
+            catalogStore.editWindow.title,
+            catalogStore.editWindow.anons,
+            catalogStore.editWindow.img,
+            catalogStore.editWindow.relatedCategories
+        )
+        if (res.status === 200) {
+            catalogStore.setEditWindow({ isOpen: false })
+            const catalogItem = await api.getCatalogItem(res.data.id)
+            if (catalogItem.status === 200) {
+                runInAction(() => {
+                    catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
+                })
+            }
+        }
+    },
     async addCatalogItem() {
         const res = await api.addCatalogItem(
             catalogStore.editWindow.title,
@@ -70,9 +117,34 @@ export const catalogStore = makeAutoObservable({
             catalogStore.editWindow.img,
             catalogStore.editWindow.relatedCategories
         )
-        if (res) {
+        if (res.status === 200) {
             catalogStore.setEditWindow({ isOpen: false })
-            console.log(res)
+            const catalogItem = await api.getCatalogItem(res.data.id)
+            if (catalogItem.status === 200) {
+                runInAction(() => {
+                    catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
+                    catalogStore.catalog.list.unshift(catalogItem.data.id)
+                })
+            }
         }
     },
+    deleteId: null,
+    setDeleteId(id: number) {
+        runInAction(() => {
+            catalogStore.deleteId = id
+        })
+    },
+    async delCatalogItem() {
+        const res = await api.delCatalogItem(catalogStore.deleteId)
+        console.log(res)
+        if (res.status === 200 && res.data.id) {
+            runInAction(() => {
+                const i = catalogStore.catalog.list.indexOf(res.data.id);
+                catalogStore.catalog.list.splice(i, 1)
+                delete catalogStore.catalog.items[res.data.id]
+                catalogStore.deleteId = null
+            })
+        }
+    }
+
 });

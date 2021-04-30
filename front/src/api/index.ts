@@ -55,7 +55,6 @@ class Api implements IApi {
         const options = {
             url: `${this.urlRoot}/users/login/`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             data: {
                 login: login,
                 password: password
@@ -70,7 +69,6 @@ class Api implements IApi {
         const options = {
             url: `/users/logout/`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             data: {}
         };
         const res = await this.requestWithToken(options)
@@ -103,7 +101,6 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             data: {
                 title: title
             }
@@ -125,7 +122,6 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
             data: {
                 id: id,
                 title: title
@@ -139,7 +135,6 @@ class Api implements IApi {
         const options = {
             url: `/category/`,
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
             data: {
                 id: id,
             }
@@ -149,7 +144,6 @@ class Api implements IApi {
     }
 
     async addCatalogItem(title: string, anons: string, img: File | string, relatedCategories: number[]) {
-
         let url = ''
         if ((typeof (img) !== 'string') && img.type) {
             const resFile = await this.uploadOneFile(img, `catalog-image`, `/catalog/upload/`)
@@ -160,12 +154,46 @@ class Api implements IApi {
         const options = {
             url: `/catalog/`,
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             data: {
                 title: title,
                 anons: anons,
                 image: url,
                 categoriesId: relatedCategories,
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async updCatalogItem(id: number, title: string, anons: string, img: File | string, relatedCategories: number[]) {
+        let url = ''
+        if ((typeof (img) !== 'string') && img.type) {
+            const resFile = await this.uploadOneFile(img, `catalog-image`, `/catalog/upload/`)
+            url = resFile.data.url
+        }
+        if ((typeof (img) === 'string')) url = img
+
+        const options = {
+            url: `/catalog/`,
+            method: 'PUT',
+            data: {
+                id: id,
+                title: title,
+                anons: anons,
+                image: url,
+                categoriesId: relatedCategories,
+            }
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async delCatalogItem(id: number) {
+        const options = {
+            url: `/catalog/`,
+            method: 'DELETE',
+            data: {
+                id: id,
             }
         };
         const res = await this.requestWithToken(options)
@@ -184,6 +212,25 @@ class Api implements IApi {
             data: data
         };
         const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async getCatalogItem(id: number) {
+        const options = {
+            url: `/catalog/?id=${id}`,
+            method: 'GET',
+        };
+        const res = await this.requestWithToken(options)
+        return res;
+    }
+
+    async getCatalogList(page: number) {
+        const options = {
+            url: `${this.urlRoot}/catalog-list/?page=${page}`,
+            method: 'GET',
+        };
+        const res = await axios(<IOptions>{ ...this.optionsDefault, ...options })
+            .catch((error: any) => error);
         return res;
     }
 

@@ -67,7 +67,7 @@ module.exports = {
         res.status(200).json({isAuth: true});
       } else res.status(200).json({isAuth: false})
     }
-     catch (e) {
+    catch (e) {
       next(err(e));
     }
     next();

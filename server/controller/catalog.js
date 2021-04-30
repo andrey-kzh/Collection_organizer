@@ -8,9 +8,8 @@ module.exports = {
 
   async getCatalogList(req, res, next) {
     try {
-      const { page } = req.body;
-
-      if (!page) throw { status: 400, message: 'Incorrect request data' };
+      let { page } = req.body;
+      if (!page) page = 1;
 
       const totalItems = await Catalog.selectCatalogCount();
       const totalPages = Math.ceil(totalItems.count / config.catalogPerPage);
@@ -32,7 +31,7 @@ module.exports = {
 
   async getCatalogItem(req, res, next) {
     try {
-      const { id } = req.body;
+      const { id } = req.query;
 
       if (!id) throw { status: 400, message: 'Incorrect request data' };
       const catalogItem = await Catalog.selectCatalogItem(id);
@@ -84,15 +83,15 @@ module.exports = {
       const { id } = req.body;
 
       if (!id) throw { status: 400, message: 'Incorrect request data' };
-      const catalogId = await Catalog.deleteCatalogItem(id);
+      const deletedCatalog = await Catalog.deleteCatalogItem(id);
       let relatedCategoriesId = [];
-      if (catalogId) {
-        relatedCategoriesId = await RelatedCategories.deleteRelationByCatalogId(catalogId.id);
+      if (deletedCatalog.id) {
+        relatedCategoriesId = await RelatedCategories.deleteRelationByCatalogId(deletedCatalog.id);
       }
-      if (!catalogId && (relatedCategoriesId.length < 1)) {
+      if (!deletedCatalog.id && (relatedCategoriesId.length < 1)) {
         res.status(200).json({ result: null });
       } else {
-        res.status(200).json({ result: { ...catalogId, ...{ relatedCategories: relatedCategoriesId } } });
+        res.status(200).json({ ...deletedCatalog, ...{ relatedCategories: relatedCategoriesId }});
       }
     } catch (e) {
       next(err(e));
