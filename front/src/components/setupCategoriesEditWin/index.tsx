@@ -42,7 +42,7 @@ export const SetupCategoriesEditWin: React.FC = observer(() => {
                 <button onClick={() => updateCategoryItem()} className="button button_catalog-item">Сохранить</button>
                 <button onClick={() => onOpen()} className="button button_catalog-item">Удалить</button>
             </div>
-        </Popup>},
+        </Popup>}
         <ConfirmationDialog />
     </>
     )

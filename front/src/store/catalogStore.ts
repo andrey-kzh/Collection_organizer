@@ -34,12 +34,15 @@ export const catalogStore = makeAutoObservable({
     currentPage: 1,
     async getCatalogList(currentPage = 1) {
         const res = await api.getCatalogList(currentPage)
-        runInAction(() => {
-            catalogStore.catalog = mapCatalog(res.data.list)
-            catalogStore.totalPages = res.data.totalPages
-            catalogStore.currentPage = currentPage
-        })
-        console.log(mapCatalog(res.data.list))
+        if (res.status === 200) {
+            runInAction(() => {
+                catalogStore.catalog = mapCatalog(res.data.list)
+                catalogStore.totalPages = res.data.totalPages
+                catalogStore.currentPage = currentPage
+            })
+        } else {
+            runInAction(() => catalogStore.catalog = { items: {}, list: [] })
+        }
     },
     editWindow: {
         isOpen: false,
