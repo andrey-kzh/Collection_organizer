@@ -2,33 +2,6 @@ const { db } = require('../libs/connection');
 
 module.exports = {
 
-  selectCatalogCount() {
-    return db.oneOrNone(
-      'SELECT count(id) FROM catalog',
-    )
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
-  },
-
-  selectCatalogList(limit, offset) {
-    return db.manyOrNone(
-      'SELECT catalog.id, catalog.title, catalog.anons, catalog.image, '
-        + 'json_agg(json_strip_nulls(json_build_object(\'id\', category.id, \'title\', category.title))) '
-        + 'as categories '
-        + 'FROM catalog '
-        + 'LEFT JOIN related_category ON (catalog.id = related_category.catalog_id) '
-        + 'LEFT JOIN category ON (category.id = related_category.category_id) '
-        + 'GROUP BY catalog.id ORDER BY catalog.id LIMIT $1 OFFSET $2 ', [limit, offset],
-
-    )
-      .then((data) => data)
-      .catch((error) => {
-        throw error;
-      });
-  },
-
   selectCatalogItem(id) {
     return db.oneOrNone(
       'SELECT catalog.id, catalog.title, catalog.anons, catalog.image, '

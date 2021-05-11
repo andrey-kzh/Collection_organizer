@@ -1,12 +1,8 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { mapCatalog } from "../libs/mapCatalog"
 import { api } from "../api";
 
 export interface ICatalogStore {
     catalog: { [index: string]: any },
-    totalPages: number,
-    currentPage: number,
-    getCatalogList: Function,
     editWindow: {
         isOpen: boolean,
         catalogId: number,
@@ -30,20 +26,6 @@ export interface ICatalogStore {
 export const catalogStore = makeAutoObservable({
 
     catalog: null,
-    totalPages: null,
-    currentPage: 1,
-    async getCatalogList(currentPage = 1) {
-        const res = await api.getCatalogList(currentPage)
-        if (res.status === 200) {
-            runInAction(() => {
-                catalogStore.catalog = mapCatalog(res.data.list)
-                catalogStore.totalPages = res.data.totalPages
-                catalogStore.currentPage = currentPage
-            })
-        } else {
-            runInAction(() => catalogStore.catalog = { items: {}, list: [] })
-        }
-    },
     editWindow: {
         isOpen: false,
         catalogId: null,
@@ -139,7 +121,6 @@ export const catalogStore = makeAutoObservable({
     },
     async delCatalogItem() {
         const res = await api.delCatalogItem(catalogStore.deleteId)
-        console.log(res)
         if (res.status === 200 && res.data.id) {
             runInAction(() => {
                 const i = catalogStore.catalog.list.indexOf(res.data.id);

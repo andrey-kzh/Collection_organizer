@@ -1,9 +1,9 @@
 import * as React from "react";
 import './style.sass'
-import { useEffect } from "react";
 import { observer } from "mobx-react";
 import { store } from '../../store'
 import { CatalogItem } from '../catalogItem'
+import { Button } from "../button";
 import useConfirmationDialog from '../../hooks/useConfirmationDialog'
 
 interface IProps { }
@@ -11,7 +11,8 @@ interface IProps { }
 export const Catalog: React.FC<IProps> = observer(() => {
 
     const { authStore: { isAuth },
-        catalogStore: { catalog, currentPage, getCatalogList, delCatalogItem, setEditWindow, setDeleteId } } = React.useContext(store)
+        catalogStore: { catalog, delCatalogItem, setEditWindow, setDeleteId },
+        searchStore: { currentPage, totalPages, findNextPage } } = React.useContext(store)
 
     const { ConfirmationDialog, onOpen } = useConfirmationDialog({
         header: 'Удалить?',
@@ -19,12 +20,6 @@ export const Catalog: React.FC<IProps> = observer(() => {
         cancelTitle: 'Нет',
         onConfirmClick: () => confirmDelete()
     })
-
-    useEffect(() => {
-        if (catalog === null) {
-            getCatalogList(currentPage)
-        }
-    }, [])
 
     if (catalog === null) return <div>Loading</div>
 
@@ -64,8 +59,13 @@ export const Catalog: React.FC<IProps> = observer(() => {
     return (
         <>
             <div className="catalog">
-                {renderCatalogItems()}
-            </div>,
+                {(catalog.list.length > 0) ? renderCatalogItems() : <div>Ничего не найдено</div>}
+                {((totalPages > 1) && (currentPage < totalPages)) &&
+                    <Button
+                        name="Далее"
+                        className="button_paging"
+                        callback={() => findNextPage()} /> }
+            </div>
             <ConfirmationDialog />
         </>
     )

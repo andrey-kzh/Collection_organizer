@@ -6,29 +6,6 @@ const RelatedCategories = require('../model/relatedCategories');
 
 module.exports = {
 
-  async getCatalogList(req, res, next) {
-    try {
-      let { page } = req.body;
-      if (!page) page = 1;
-
-      const totalItems = await Catalog.selectCatalogCount();
-      const totalPages = Math.ceil(totalItems.count / config.catalogPerPage);
-
-      if (page <= totalPages) {
-        let pageOffset = page - 1;
-        if (pageOffset < 0) pageOffset = 0;
-        const offset = pageOffset * config.catalogPerPage;
-        const catalogList = await Catalog.selectCatalogList(config.catalogPerPage, offset);
-        res.status(200).json({ totalPages, list: catalogList });
-      } else {
-        res.status(200).json({ totalPages, list: [] });
-      }
-    } catch (e) {
-      next(err(e));
-    }
-    next();
-  },
-
   async getCatalogItem(req, res, next) {
     try {
       const { id } = req.query;
@@ -91,7 +68,7 @@ module.exports = {
       if (!deletedCatalog.id && (relatedCategoriesId.length < 1)) {
         res.status(200).json({ result: null });
       } else {
-        res.status(200).json({ ...deletedCatalog, ...{ relatedCategories: relatedCategoriesId }});
+        res.status(200).json({ ...deletedCatalog, ...{ relatedCategories: relatedCategoriesId } });
       }
     } catch (e) {
       next(err(e));
@@ -118,4 +95,4 @@ function addRelatedCategories(catalogId, categoriesId) {
     }
     resolve([]);
   });
-};
+}

@@ -7,8 +7,8 @@ module.exports = {
 
   async getAllCategories(req, res, next) {
     try {
-      //const session = await localStorage.getStore().get('session');
-      //const categorys = await Category.selectAllCategories(session.userId);
+      // const session = await localStorage.getStore().get('session');
+      // const categorys = await Category.selectAllCategories(session.userId);
       const categorys = await Category.selectAllCategories();
       res.status(200).json(categorys);
     } catch (e) {

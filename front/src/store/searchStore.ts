@@ -1,35 +1,76 @@
+import { catalogStore } from './catalogStore';
 import { makeAutoObservable, runInAction } from "mobx";
 import { api } from "../api";
+import { mapCatalog } from "../libs/mapCatalog"
 
 export interface ISearchStore {
-    query: string;
-    setQuery: Function;
-    selectdedCategories: number[];
-    addSelectdedCategories: Function;
-    delSelectdedCategories: Function;
+    form: {
+        searchString: string;
+        setSearchString: Function;
+        selectdedCategories: number[];
+        addSelectdedCategories: Function;
+        delSelectdedCategories: Function;
+    }
+    request: {
+        searchString: string;
+        selectdedCategories: number[];
+    },
+    setRequestParams: Function;
+    totalPages: number,
+    setTotalPages: Function;
+    currentPage: number,
     find: Function;
-    //computedQuery: Function;
+    findNextPage: Function;
 }
 
 export const searchStore = makeAutoObservable({
-    query: '',
-    setQuery(query: string): void {
-        searchStore.query = query;
+    form: {
+        searchString: '',
+        setSearchString(searchString: string): void {
+            searchStore.form.searchString = searchString;
+        },
+        selectdedCategories: [],
+        addSelectdedCategories(categoryId: number) {
+            runInAction(() => searchStore.form.selectdedCategories.push(categoryId))
+        },
+        delSelectdedCategories(categoryId: number) {
+            runInAction(() => searchStore.form.selectdedCategories.splice(searchStore.form.selectdedCategories.indexOf(categoryId), 1))
+        },
     },
-    selectdedCategories: [],
-    addSelectdedCategories(categoryId: number) {
-        runInAction(() => searchStore.selectdedCategories.push(categoryId))
+    request: {
+        searchString: '',
+        selectdedCategories: []
     },
-    delSelectdedCategories(categoryId: number) {
-        runInAction(() => searchStore.selectdedCategories.splice(searchStore.selectdedCategories.indexOf(categoryId), 1))
+    setRequestParams() {
+        runInAction(() => {
+            searchStore.request.searchString = searchStore.form.searchString
+            searchStore.request.selectdedCategories = searchStore.form.selectdedCategories
+        })
     },
-    async find() {
-        const res = await api.findCatalogItems(searchStore.query, searchStore.selectdedCategories)
-        console.log(res)
+    totalPages: null,
+    async setTotalPages() {
+        const res = await api.findTotalPages(searchStore.form.searchString, searchStore.form.selectdedCategories)
+        if (res.status === 200) {
+            runInAction(() => {
+                searchStore.totalPages = res.data.totalPages
+            })
+        }
     },
-    /*
-    get computedQuery(): any {
-        return searchStore.query + '123'
+    currentPage: 1,
+    async find(currentPage = 1) {
+        const res = await api.findCatalogItems(searchStore.request.searchString, searchStore.request.selectdedCategories, currentPage)
+        if (res.status === 200 && res.data.result) {
+            runInAction(() => {
+                catalogStore.catalog = mapCatalog(res.data.result)
+                searchStore.currentPage = currentPage
+            })
+        } else {
+            runInAction(() => catalogStore.catalog = { items: {}, list: [] })
+        }
     },
-    */
+    async findNextPage() {
+        //Запросить следующую страницу find()
+        //дополнить catalog результатами
+    }
+
 });

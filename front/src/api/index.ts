@@ -87,10 +87,20 @@ class Api implements IApi {
         return false
     }
 
-    async findCatalogItems(query: string, categories: number[]) {
+    async findCatalogItems(query: string, categories: number[], page: number) {
 
         const options = {
-            url: `/search?search=${query}&categories=${categories}`,
+            url: `/search?search=${query}&categories=${categories}&page=${page}`,
+            method: 'GET',
+        };
+        const res = await this.requestWithToken(options);
+        return res
+    }
+
+    async findTotalPages(query: string, categories: number[]) {
+
+        const options = {
+            url: `/search/total-pages/?search=${query}&categories=${categories}`,
             method: 'GET',
         };
         const res = await this.requestWithToken(options);
@@ -221,16 +231,6 @@ class Api implements IApi {
             method: 'GET',
         };
         const res = await this.requestWithToken(options)
-        return res;
-    }
-
-    async getCatalogList(page: number) {
-        const options = {
-            url: `${this.urlRoot}/catalog-list/?page=${page}`,
-            method: 'GET',
-        };
-        const res = await axios(<IOptions>{ ...this.optionsDefault, ...options })
-            .catch((error: any) => error);
         return res;
     }
 

@@ -64,10 +64,9 @@ module.exports = {
     try {
       const session = await localStorage.getStore().get('session');
       if (session) {
-        res.status(200).json({isAuth: true});
-      } else res.status(200).json({isAuth: false})
-    }
-    catch (e) {
+        res.status(200).json({ isAuth: true });
+      } else res.status(200).json({ isAuth: false });
+    } catch (e) {
       next(err(e));
     }
     next();
