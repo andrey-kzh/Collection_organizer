@@ -8,15 +8,9 @@ import { useHistory, useLocation } from "react-router-dom";
 
 export const SearchForm: React.FC = observer(() => {
 
-    const { searchStore: { form: { searchString, setSearchString, selectdedCategories, addSelectdedCategories, delSelectdedCategories } },
-        searchStore: { find, setTotalPages, setRequestParams },
+    const { searchStore: { find, setTotalPages, setRequestParams,
+        form: { searchString, setSearchString, selectdedCategories, addSelectdedCategories, delSelectdedCategories } },
         catalogStore: { catalog } } = React.useContext(store)
-
-    /* Обработчик кнопки поиска
-    1) history.push при нажатии
-    2) pagesCount()
-    3) find()
-    */
 
     const history = useHistory()
     const location = useLocation()
@@ -44,6 +38,7 @@ export const SearchForm: React.FC = observer(() => {
             const params = new URLSearchParams(searchString);
             //console.log(decodeURIComponent(params.get('search')))
             //console.log(decodeURIComponent(params.get('categories')))
+            //setRequestParamsFromBowserSearchString()
             setTotalPages()
             find()
         }

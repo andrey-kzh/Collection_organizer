@@ -69,8 +69,19 @@ export const searchStore = makeAutoObservable({
         }
     },
     async findNextPage() {
-        //Запросить следующую страницу find()
-        //дополнить catalog результатами
+        const nextPage = searchStore.currentPage + 1
+        console.log(nextPage)
+        const res = await api.findCatalogItems(searchStore.request.searchString, searchStore.request.selectdedCategories, nextPage)
+        if (res.status === 200 && res.data.result) {
+            const mapedCatalog = mapCatalog(res.data.result)
+            runInAction(() => {
+                catalogStore.catalog.items = { ...catalogStore.catalog.items, ...mapedCatalog.items }
+                catalogStore.catalog.list.push(mapedCatalog.list)
+                searchStore.currentPage = nextPage
+            })
+        } else {
+            runInAction(() => catalogStore.catalog = { items: {}, list: [] })
+        }
     }
 
 });
