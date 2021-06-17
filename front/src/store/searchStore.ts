@@ -16,6 +16,7 @@ export interface ISearchStore {
         selectdedCategories: number[];
     },
     setRequestParams: Function;
+    setRequestParamsFromBowserSearchString: Function,
     totalPages: number,
     setTotalPages: Function;
     currentPage: number,
@@ -47,6 +48,10 @@ export const searchStore = makeAutoObservable({
             searchStore.request.selectdedCategories = searchStore.form.selectdedCategories
         })
     },
+    setRequestParamsFromBowserSearchString(searchString: string | null, categories: number[] | null) {
+            searchStore.request.searchString = searchString
+            searchStore.request.selectdedCategories = categories
+    },
     totalPages: null,
     async setTotalPages() {
         const res = await api.findTotalPages(searchStore.form.searchString, searchStore.form.selectdedCategories)
@@ -70,7 +75,6 @@ export const searchStore = makeAutoObservable({
     },
     async findNextPage() {
         const nextPage = searchStore.currentPage + 1
-        console.log(nextPage)
         const res = await api.findCatalogItems(searchStore.request.searchString, searchStore.request.selectdedCategories, nextPage)
         if (res.status === 200 && res.data.result) {
             const mapedCatalog = mapCatalog(res.data.result)

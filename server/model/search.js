@@ -51,10 +51,11 @@ module.exports = {
   },
 
   findCatalogBySearchString(search, categories, limit, offset) {
-    let connector;
-    let categoriesQuery;
+    let connector, categoriesQuery;
     (!search) ? connector = 'OR' : connector = 'AND';
-    (categories.length > 0) ? categoriesQuery = `${connector} category.id IN (${categories}) ` : categoriesQuery = '';
+    if (categories.length > 0) {
+      categoriesQuery = `${connector} catalog.id = ANY (SELECT catalog_id FROM related_category WHERE category_id IN (${categories}))`
+    } else categoriesQuery = '';
 
     return db.manyOrNone(
       'SELECT catalog.id, catalog.title, catalog.anons, catalog.image, '

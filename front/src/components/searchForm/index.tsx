@@ -8,7 +8,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 export const SearchForm: React.FC = observer(() => {
 
-    const { searchStore: { find, setTotalPages, setRequestParams,
+    const { searchStore: { find, setTotalPages, setRequestParams, setRequestParamsFromBowserSearchString,
         form: { searchString, setSearchString, selectdedCategories, addSelectdedCategories, delSelectdedCategories } },
         catalogStore: { catalog } } = React.useContext(store)
 
@@ -24,21 +24,13 @@ export const SearchForm: React.FC = observer(() => {
         find()
     }
 
-    /* useEffect если catalog === null
-    1) получить параметры из адресной строки
-    2) Обновить соответствующие свойства в сторе
-    3) Вызвать метод для обновления пэйджинга
-    3) Вызвать метод поиска
-    4) Если параметров нет, то искать все
-    */
-
     useEffect(() => {
         if (catalog === null) {
-            const searchString = location.search;
-            const params = new URLSearchParams(searchString);
-            //console.log(decodeURIComponent(params.get('search')))
-            //console.log(decodeURIComponent(params.get('categories')))
-            //setRequestParamsFromBowserSearchString()
+            const params = new URLSearchParams(location.search);
+            let searchString = '', categories = ''
+            if (params.has('search')) searchString = decodeURIComponent(params.get('search'))
+            if (params.has('categories')) categories = decodeURIComponent(params.get('categories'))
+            setRequestParamsFromBowserSearchString(searchString, categories)
             setTotalPages()
             find()
         }
