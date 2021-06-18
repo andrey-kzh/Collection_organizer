@@ -20,14 +20,12 @@ export const EditCatalogItem: React.FC = observer(() => {
     }
 
     return (
-
         isOpen && <Popup className='' closeCallback={() => setEditWindow({ isOpen: false })}>
 
             <form onSubmit={(e) => e.preventDefault()} className="edit-cat-item-form">
 
                 <div className="edit-cat-item-form__img-wrap">
                     <div>
-
                         <div className="edit-cat-item-form__input-title">Изображение</div>
                         <label className="button edit-cat-item-form__img-button">
                             Открыть
@@ -38,7 +36,6 @@ export const EditCatalogItem: React.FC = observer(() => {
                                 type="file"
                                 name="image" />
                         </label>
-
                     </div>
 
                     <div className="edit-cat-item-form__img" style={{ backgroundImage: `url(${previewImg})` }}>
@@ -47,7 +44,6 @@ export const EditCatalogItem: React.FC = observer(() => {
                                 className="edit-cat-item-form-del"></button>
                         }
                     </div>
-
                 </div>
 
                 <div className="edit-cat-item-form__input-wrap">
@@ -68,6 +64,7 @@ export const EditCatalogItem: React.FC = observer(() => {
                     selectdedCategories={relatedCategories}
                     addSelectdedCategories={addRelatedCategories}
                     delSelectdedCategories={delRelatedCategories} />
+                
 
                 <div className="edit-cat-item-form__submit-wrap">
                     <button onClick={() => saveCatalogItem()} className="button">Сохранить</button>

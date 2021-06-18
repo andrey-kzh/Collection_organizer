@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react"
 import './style.sass'
 import { observer } from "mobx-react";
 import { store } from '../../store';
@@ -10,23 +9,13 @@ interface IProps {
     selectdedCategories: number[],
     delSelectdedCategories: Function
     addSelectdedCategories: Function
-  }
+    setIsOpen: Function
+}
 
-export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories }) => {
+export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories, setIsOpen }) => {
 
     const {
-        categoriesStore: { categories, getAllCategories, isOpenCategoriesSelector, setIsOpenCategoriesSelector }} = React.useContext(store)
-
-    useEffect(() => {
-        if (categories === null) {
-            getAllCategories()
-        }
-    },[])
-
-    if (categories === null) {
-        return <div>Loading</div>
-    }
-
+        categoriesStore: { categories } } = React.useContext(store)
 
     const renderCategories = () => {
         let isActive
@@ -44,8 +33,7 @@ export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategorie
     }
 
     return (
-        isOpenCategoriesSelector &&
-        <Popup className='' closeCallback={() => setIsOpenCategoriesSelector(false)}>
+        <Popup className='' closeCallback={() => setIsOpen(false)}>
             <div className="select-category-header">Категории</div>
             <div className="select-category select-category_none">
                 {renderCategories()}
