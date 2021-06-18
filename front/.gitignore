@@ -4,3 +4,4 @@ dist/
 .idea/
 .DS_*
 package-lock.json
+.vscode/

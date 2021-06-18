@@ -1,7 +1,7 @@
 import * as React from "react";
 import './style.sass'
 import { Button } from "../button";
-import { CatalogCategoryItem } from "../CatalogCategoryItem"
+import { CatalogCategoryItem } from "../catalogCategoryItem"
 
 interface IProps {
     isAuth: boolean,

@@ -5,8 +5,6 @@ import { api } from "../api";
 export interface ICategoriesStore {
     categories: { [index: string]: any };
     getAllCategories: Function;
-    isOpenCategoriesSelector: boolean;
-    setIsOpenCategoriesSelector: Function;
 }
 
 export const categoriesStore = makeAutoObservable({
@@ -18,9 +16,5 @@ export const categoriesStore = makeAutoObservable({
         } else {
             runInAction(() => categoriesStore.categories = { items: {}, list: [] })
         }
-    },
-    isOpenCategoriesSelector: false,
-    setIsOpenCategoriesSelector(isOpen: boolean) {
-        runInAction(() => categoriesStore.isOpenCategoriesSelector = isOpen)
     },
 });

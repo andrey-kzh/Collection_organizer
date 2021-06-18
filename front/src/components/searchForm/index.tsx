@@ -45,7 +45,6 @@ export const SearchForm: React.FC = observer(() => {
                         selectdedCategories={selectdedCategories}
                         addSelectdedCategories={addSelectdedCategories}
                         delSelectdedCategories={delSelectdedCategories} />
-
                 </div>
             </form>
         </div>
