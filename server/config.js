@@ -13,5 +13,5 @@ module.exports = {
   },
   jwtSecretKey: 'kep3H1x94s024l',
   sessionExpirationDays: 30, // days
-  catalogPerPage: 10,
+  catalogPerPage: 40,
 };

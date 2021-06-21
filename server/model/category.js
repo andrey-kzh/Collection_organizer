@@ -2,9 +2,10 @@ const { db } = require('../libs/connection');
 
 module.exports = {
 
-  selectAllCategories(userId) {
+  selectAllCategories() {
     return db.manyOrNone(
-      'SELECT id, title FROM category WHERE user_id = $1', userId,
+      // 'SELECT id, title FROM category WHERE user_id = $1', userId,
+      'SELECT id, title FROM category',
     )
       .then((data) => data)
       .catch((error) => {

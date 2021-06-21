@@ -34,7 +34,8 @@ const common = merge([
         output: {
             filename: "[name].proj.js",
             chunkFilename: '[name].proj.js',
-            path: path.resolve(rootFolder, targetFolder)
+            path: path.resolve(rootFolder, targetFolder),
+            publicPath: '/',
         },
         resolve: {
             extensions: [".js", ".json", ".ts", ".tsx"],
@@ -74,7 +75,10 @@ const common = merge([
 
 
 const devServer = merge([{ //watch сервер
-    devServer: {contentBase: path.resolve(rootFolder, targetFolder)}
+    devServer: {
+        historyApiFallback: true,
+        contentBase: path.resolve(rootFolder, targetFolder)
+    }
 }]);
 
 

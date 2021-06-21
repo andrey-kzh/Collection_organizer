@@ -1,21 +1,42 @@
 import * as React from "react";
 import './style.sass'
+import { observer } from "mobx-react";
+import { store } from "../../store";
+import { NavLink } from "react-router-dom";
+import { NavButton } from "../navButton";
+import { NavButtonSearch } from "../navButtonSearch";
+import { useLocation } from "react-router-dom";
 
-import {NavLinkSearch} from "../navLinkSearch";
-import {NavButtonSearch} from "../navButtonSearch";
-import {NavLink} from "../navLink";
-import {NavButton} from "../navButton";
+export const Nav: React.FC = observer(() => {
 
-export const Nav:React.FC = () => {
+    const { authStore: { isAuth, logoutRequest }, catalogStore: { setEditWindow } } = React.useContext(store);
+    const location = useLocation().pathname;
 
-    return(
-        <div className="nav">
-            <NavButtonSearch/>
+    const renderMenu = () => {
+        if (isAuth) {
+            return <>
+                {location === '/' && <NavButton callback={() => setEditWindow({ isOpen: true })} name={'Добавить'} />}
+                <NavLink activeClassName="nav-link_active" className="nav-link" to={'/setup/'}>Настройки</NavLink>
+                <NavButton callback={logoutRequest} name={'Выход'} />
+            </>
+        }
+        return <NavLink activeClassName="nav-link_active" className="nav-link" to={'/auth/'}>Войти</NavLink>
+    }
+
+
+    return (
+        <nav className="nav">
+            {
+                location === '/'
+                    ? <NavButtonSearch />
+                    : <NavLink className="nav-link-search" to={'/'}>Поиск</NavLink>
+            }
+
             <div className="nav-wrap">
-                <NavButton name={'Добавить'}/>
-                <NavLink name={'Настройки'}/>
-                <NavButton name={'Выход'}/>
+                {renderMenu()}
             </div>
-        </div>
+        </nav>
     )
+
 }
+)

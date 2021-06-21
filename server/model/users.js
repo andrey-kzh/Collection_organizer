@@ -21,7 +21,7 @@ module.exports = {
     )
       .then((data) => data)
       .catch((error) => {
-        throw error;
+        // throw error;
       });
   },
 

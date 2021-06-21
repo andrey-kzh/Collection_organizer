@@ -41,6 +41,7 @@
 
 .popup__close-wrap
   text-align: right
+  padding: 0 0 10px 0
 
 .popup__close
   padding: 0
@@ -55,3 +56,18 @@
 .popup__close:hover
   background: url('data:image/svg+xml;utf8, <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="10.5" fill="none" stroke="rgba(189,189,189,1)"/><path d="M16.1265 5.62347L5.87348 15.8765" stroke="rgba(189,189,189,1)"/><path d="M16.1265 15.8765L5.87348 5.62348" stroke="rgba(189,189,189,1)"/></svg>')
   background-size: contain
+
+.popup-wrap_delete-confirmation
+  z-index: 110
+
+.popup-delete-confirmation__header
+  text-align: center
+  font-weight: bold
+
+.popup-delete-confirmation__buttons-wrap
+  margin: 20px 0 0 0
+  min-width: 320px
+  display: flex
+  justify-content: space-between
+  @media screen and (max-width: $mobileResolution)
+    min-width: auto

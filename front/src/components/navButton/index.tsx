@@ -1,12 +1,11 @@
 import * as React from "react";
 import './style.sass'
 
-interface NavButtonProps {
-    name:String,
-    //link:String,
-    //onClick():void
+interface IProps {
+    name: String,
+    callback?: Function,
 }
 
-export const NavButton:React.FC<NavButtonProps> = ({name}) => {
-    return <button className="nav-button">{name}</button>
+export const NavButton: React.FC<IProps> = ({name, callback}) => {
+    return <button onClick={() => callback()} className="nav-button">{name}</button>
 }

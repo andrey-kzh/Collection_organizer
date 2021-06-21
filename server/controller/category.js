@@ -7,8 +7,9 @@ module.exports = {
 
   async getAllCategories(req, res, next) {
     try {
-      const session = await localStorage.getStore().get('session');
-      const categorys = await Category.selectAllCategories(session.userId);
+      // const session = await localStorage.getStore().get('session');
+      // const categorys = await Category.selectAllCategories(session.userId);
+      const categorys = await Category.selectAllCategories();
       res.status(200).json(categorys);
     } catch (e) {
       next(err(e));
@@ -43,15 +44,15 @@ module.exports = {
       const { id } = req.body;
 
       if (!id) throw { status: 400, message: 'Incorrect request data' };
-      const categoryId = await Category.deleteCategory(id);
+      const deletedCategory = await Category.deleteCategory(id);
       let relatedCategoriesId = [];
-      if (categoryId) {
-        relatedCategoriesId = await RelatedCategories.deleteRelationByCategoryId(categoryId);
+      if (deletedCategory.id) {
+        relatedCategoriesId = await RelatedCategories.deleteRelationByCategoryId(deletedCategory.id);
       }
-      if (!categoryId && (relatedCategoriesId.length < 1)) {
-        res.status(200).json({ result: null });
+      if (!deletedCategory.id && (relatedCategoriesId.length < 1)) {
+        res.status(200).json({ id: null });
       } else {
-        res.status(200).json({ result: { ...categoryId, ...{ relatedCategories: relatedCategoriesId } } });
+        res.status(200).json({ ...deletedCategory, ...{ relatedCategories: relatedCategoriesId } });
       }
     } catch (e) {
       next(err(e));

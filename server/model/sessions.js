@@ -22,7 +22,7 @@ module.exports = {
     )
       .then((data) => data)
       .catch((error) => {
-        throw error;
+        // throw error;
       });
   },
 
@@ -62,7 +62,7 @@ module.exports = {
     )
       .then((data) => data)
       .catch((error) => {
-        throw error;
+        // throw error;
       });
   },
 
