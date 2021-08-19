@@ -7,7 +7,7 @@ const DefinePlugin = require('./webpack/plugins/DefinePlugin');
 const HashedModuleIdsPlugin = require('./webpack/plugins/HashedModuleIdsPlugin');
 const HtmlWebpackPlugin = require('./webpack/plugins/HtmlWebpackPlugin');
 const MiniCssExtractPlugin = require('./webpack/plugins/MiniCssExtractPlugin');
-const OptimizeCssAssetsPlugin = require('./webpack/plugins/OptimizeCssAssetsPlugin'); //сжатие css, только prod.
+const CssMinimizerPlugin = require('./webpack/plugins/CSSMinimizerWebpackPlugin');
 const CopyWebpackPlugin = require('./webpack/plugins/CopyWebpackPlugin');
 
 //модули
@@ -77,7 +77,7 @@ const common = merge([
 const devServer = merge([{ //watch сервер
     devServer: {
         historyApiFallback: true,
-        contentBase: path.resolve(rootFolder, targetFolder)
+        static: path.resolve(rootFolder, targetFolder)
     }
 }]);
 
@@ -99,7 +99,7 @@ module.exports = function () {
         case 'production': //сборка prod
             return merge([
                 common,
-                OptimizeCssAssetsPlugin()
+                CssMinimizerPlugin()
             ]);
 
         default: //watch сервер
