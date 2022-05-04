@@ -46,7 +46,9 @@ class Api implements IApi {
             return await axios(<IOptions>{ ...this.optionsDefault, ...options })
                 .catch((error: any) => error);
         } catch (e) {
-            console.log(e.message)
+            if (e instanceof Error) {
+                console.log(e.message)
+            }
         }
     }
 
