@@ -1,6 +1,0 @@
-prod/
-dist/
-/node_modules/
-.idea/
-.DS_*
-.vscode/

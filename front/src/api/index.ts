@@ -23,13 +23,16 @@ interface IOptions {
 
 class Api implements IApi {
 
-    constructor() {
+    constructor(backendHost: string) {
         axios.interceptors.response.use((response: any) => response, (error: any) => {
             return Promise.reject(error.response)
         });
+
+        //set api url root for dev and prod
+        this.urlRoot = `${backendHost}/api`;
     }
 
-    urlRoot = 'http://localhost:3000/api';
+    urlRoot;
     optionsDefault = {};
 
     async requestWithToken(options: { [key: string]: any }) {
@@ -44,9 +47,9 @@ class Api implements IApi {
             if (accessToken) options.headers.Authorization = `Bearer ${accessToken}`;
 
             return await axios(<IOptions>{ ...this.optionsDefault, ...options })
-                .catch((error: any) => error);
+                .catch((error: Error) => error);
         } catch (e) {
-            console.log(e.message)
+            if (e instanceof Error) console.log(e.message)
         }
     }
 
@@ -236,4 +239,4 @@ class Api implements IApi {
 
 }
 
-export const api = new Api();
+export const api = new Api(process.env.BACKEND_HOST);
