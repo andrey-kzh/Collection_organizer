@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const router = require('./routes/routes');
 const { localStorage } = require('./libs/asyncLocalStorage');
 
@@ -13,6 +14,16 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', router);
+
+// html
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  if (!req.url.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  }
+});
 
 app.use((error, req, res, next) => {
   res.status(error.status).json({ error: { code: error.code, message: error.message } });
