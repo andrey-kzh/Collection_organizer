@@ -1,4 +1,4 @@
-export function mapCatalog(catalog: Array<object>) {
+export function mapCatalog(catalog: Array<object>): {items: { [index: string]: any }, list: number[]} {
 
     let normalized: { items: { [index: string]: any }, list: number[] } = {
         items: {},

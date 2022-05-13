@@ -6,9 +6,7 @@ import { CatalogItem } from '../catalogItem'
 import { Button } from "../button";
 import useConfirmationDialog from '../../hooks/useConfirmationDialog'
 
-interface IProps { }
-
-export const Catalog: React.FC<IProps> = observer(() => {
+export const Catalog: React.FC = observer(() => {
 
     const { authStore: { isAuth },
         catalogStore: { catalog, delCatalogItem, setEditWindow, setDeleteId },

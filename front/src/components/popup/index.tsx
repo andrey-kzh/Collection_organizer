@@ -3,16 +3,16 @@ import './style.sass'
 
 interface IProps {
     className: String,
-    closeCallback: Function
+    closeCallback: () => void,
 }
 
-export const Popup: React.FC<IProps> = ({className, closeCallback, children}) => {
+export const Popup: React.FC<IProps> = ({ className, closeCallback, children }) => {
     return (
         <div className={`popup-wrap ${className}`}>
             <div className="popup">
                 <div className="popup__close-wrap">
                     <button
-                        onClick={()=>closeCallback()}
+                        onClick={() => closeCallback()}
                         className="popup__close">
                     </button>
                 </div>

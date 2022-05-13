@@ -4,8 +4,8 @@ import './style.sass'
 interface IProps {
     title: string,
     isActive: boolean,
-    addCallback?: Function,
-    delCallback?: Function,
+    addCallback?: () => void,
+    delCallback?: () => void,
 }
 
 export const SelectCategoriesItem: React.FC<IProps> = React.memo(({ title, isActive, addCallback, delCallback }) => {

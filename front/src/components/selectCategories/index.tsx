@@ -7,9 +7,9 @@ import { Popup } from '../popup'
 
 interface IProps {
     selectdedCategories: number[],
-    delSelectdedCategories: Function
-    addSelectdedCategories: Function
-    setIsOpen: Function
+    delSelectdedCategories: (id: number) => void,
+    addSelectdedCategories: (id: number) => void,
+    setIsOpen: (n: boolean) => void
 }
 
 export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories, setIsOpen }) => {

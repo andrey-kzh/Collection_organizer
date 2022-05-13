@@ -30,7 +30,8 @@ export const SearchForm: React.FC = observer(() => {
         let searchString = '', categories = ''
         if (params.has('search')) searchString = decodeURIComponent(params.get('search'))
         if (params.has('categories')) categories = decodeURIComponent(params.get('categories'))
-        setRequestParamsFromBowserSearchString(searchString, categories)
+        const categoriesNumberArr:number[] = categories.split(',').map(Number)
+        setRequestParamsFromBowserSearchString(searchString,  categoriesNumberArr)
         setTotalPages()
         find()
     }, [])

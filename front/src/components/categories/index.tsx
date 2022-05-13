@@ -9,8 +9,8 @@ import { SelectCategories } from "../selectCategories"
 
 interface IProps {
   selectdedCategories: number[],
-  delSelectdedCategories: Function
-  addSelectdedCategories: Function
+  delSelectdedCategories: (categoryId: number) => void,
+  addSelectdedCategories: (categoryId: number) => void
 }
 
 export const Categories: React.FC<IProps> = observer(({ selectdedCategories, delSelectdedCategories, addSelectdedCategories }) => {

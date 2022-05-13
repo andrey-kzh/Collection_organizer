@@ -3,7 +3,7 @@ import './style.sass'
 
 interface IProps {
     name: String,
-    callback?: Function,
+    callback?: () => void,
 }
 
 export const NavButton: React.FC<IProps> = ({name, callback}) => {

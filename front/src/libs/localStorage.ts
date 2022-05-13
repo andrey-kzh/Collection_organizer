@@ -6,7 +6,7 @@ export function clearTokenFromStorage() {
     localStorage.removeItem('token');
 }
 
-export function getTokenFromStorage() {
+export function getTokenFromStorage(): Object {
     if (!localStorage.token) return null;
     return localStorage.token;
 }

@@ -2,7 +2,20 @@ import React, { useCallback, useState } from "react";
 import { Popup } from "../components/popup"
 import { Button } from "../components/button"
 
-export default function useConfirmationDialog({ header, confirmTitle, cancelTitle, onConfirmClick }: { [index: string]: any }) {
+
+interface IProps {
+    header: string,
+    confirmTitle: string,
+    cancelTitle: string,
+    onConfirmClick: () => void,
+}
+
+interface IReturn {
+    onOpen: () => void,
+    ConfirmationDialog: () => JSX.Element
+}
+
+export default function useConfirmationDialog({ header, confirmTitle, cancelTitle, onConfirmClick }: IProps): IReturn {
 
     const [isOpen, setIsOpen] = useState(false)
     const onOpen = () => setIsOpen(!isOpen)

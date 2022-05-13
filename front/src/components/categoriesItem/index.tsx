@@ -3,7 +3,7 @@ import './style.sass'
 
 interface IProps {
     title: string,
-    delCallback?: Function
+    delCallback?: () => void
 }
 
 export const CategoriesItem: React.FC<IProps> = React.memo(({ title, delCallback }) => {
