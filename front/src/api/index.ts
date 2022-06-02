@@ -1,5 +1,5 @@
 import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
-import { getTokenFromStorage } from "../libs/localStorage";
+import tokensStorage from "../libs/localStorage";
 
 interface IApi {
     urlRoot: String,
@@ -39,7 +39,7 @@ class Api implements IApi {
     async requestWithToken(options: AxiosRequestConfig) {
         try {
             options.url = `${this.urlRoot}${options.url}`;
-            let accessToken = getTokenFromStorage();
+            let accessToken = tokensStorage.getTokenFromStorage();
 
             if (!options.headers) {
                 options.headers = {};
@@ -53,7 +53,6 @@ class Api implements IApi {
             if (e instanceof Error) console.log(e.message)
         }
     }
-
 
     async login(login: string, password: string) {
         const options: AxiosRequestConfig = {

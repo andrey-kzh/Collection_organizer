@@ -1,12 +1,14 @@
-export function saveTokenToStorage(token: string) {
-    localStorage.setItem('token', token);
+export default {
+    saveTokenToStorage(token: string) {
+        localStorage.setItem('token', token);
+    },
+    clearTokenFromStorage() {
+        localStorage.removeItem('token');
+    },
+    getTokenFromStorage(): Object {
+        if (!localStorage.token) return null;
+        return localStorage.token;
+    }
+
 }
 
-export function clearTokenFromStorage() {
-    localStorage.removeItem('token');
-}
-
-export function getTokenFromStorage(): Object {
-    if (!localStorage.token) return null;
-    return localStorage.token;
-}
