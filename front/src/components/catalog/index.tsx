@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from "react"
 import './style.sass'
-import { observer } from "mobx-react";
+import { observer } from "mobx-react"
 import { store } from '../../store'
 import { CatalogItem } from '../catalogItem'
-import { Button } from "../button";
+import { Button } from "../button"
 import useConfirmationDialog from '../../hooks/useConfirmationDialog'
 
 export const Catalog: React.FC = observer(() => {
