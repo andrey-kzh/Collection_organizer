@@ -25,6 +25,5 @@ test('should fetch any request', async () => {
     };
    
     const res = await api.requestWithToken(options).then((data) => data)
-    console.log(res)
 })
 
