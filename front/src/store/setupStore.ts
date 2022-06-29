@@ -7,9 +7,9 @@ export interface ISetupStore {
     setCategoryTitle: (title: string) => void;
     addCategoryItem: () => void;
     updateCategoryItem: () => void;
-    deleteCategoryItem: ()=> void;
+    deleteCategoryItem: () => void;
     editWindow: { isOpen: boolean, title: string, id: number };
-    setEditWindow: ({}: { [index: string]: any }) => void;
+    setEditWindow: ({ }: { isOpen: boolean, id: number | null, title: string }) => void;
 }
 
 export const setupStore = makeAutoObservable({
@@ -58,7 +58,7 @@ export const setupStore = makeAutoObservable({
         id: null,
         title: '',
     },
-    setEditWindow({ isOpen, id, title }: { [index: string]: any }) {
+    setEditWindow({ isOpen, id, title }: { isOpen: boolean, id: number | null, title: string }) {
         if (isOpen === undefined) isOpen = setupStore.editWindow.isOpen;
         if (id === undefined) id = setupStore.editWindow.id;
         if (title === undefined) title = setupStore.editWindow.title;

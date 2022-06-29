@@ -2,7 +2,9 @@ import React from 'react'
 import { mount, shallow, render } from 'enzyme';
 import { Catalog } from './index';
 
-const catalogState = {
+interface ICatalogState { items: {}, list: number[] | [] }
+
+const catalogFullState: ICatalogState = {
   items: {
     46: {
       id: 46,
@@ -22,90 +24,77 @@ const catalogState = {
   list: [46, 55]
 }
 
-const context = {
-  authStore: {
-    isAuth: true
-  },
-  catalogStore: {
-    catalog: catalogState,
-    delCatalogItem: () => { },
-    setEditWindow: () => { },
-    setDeleteId: () => { },
-  },
-  searchStore: {
-    currentPage: '',
-    totalPages: '',
-    findNextPage: ''
-  }
-}
-
-const contextCatalogNull: {} = {
-  authStore: {
-    isAuth: true
-  },
-  catalogStore: {
-    catalog: null,
-    delCatalogItem: () => { },
-    setEditWindow: () => { },
-    setDeleteId: () => { },
-  },
-  searchStore: {
-    currentPage: '',
-    totalPages: '',
-    findNextPage: ''
-  }
-}
-
-const contextCatalogEmpty: {} = {
-  authStore: {
-    isAuth: true
-  },
-  catalogStore: {
-    catalog: {
-      items: {},
-      list: []
-    },
-    delCatalogItem: () => { },
-    setEditWindow: () => { },
-    setDeleteId: () => { },
-  },
-  searchStore: {
-    currentPage: '',
-    totalPages: '',
-    findNextPage: ''
-  }
+const catalogEmptyState: ICatalogState = {
+    items: {},
+    list: []
 }
 
 describe('Catalog component', () => {
 
+  const mockSetEditWindow = jest.fn()
+
+  const context = (catalogState: ICatalogState) => {
+    return {
+      authStore: {
+        isAuth: true
+      },
+      catalogStore: {
+        catalog: catalogState,
+        delCatalogItem: () => { },
+        setEditWindow: mockSetEditWindow,
+        setDeleteId: () => { },
+      },
+      searchStore: {
+        currentPage: '',
+        totalPages: '',
+        findNextPage: ''
+      }
+    }
+  }
+
   const spyContext = jest.spyOn(React, 'useContext');
 
   it('Should render', () => {
-    spyContext.mockReturnValue(context);
+    spyContext.mockReturnValue(context(catalogEmptyState));
     const component = shallow(<Catalog />);
     const wrapper = component.find(".catalog")
     expect(wrapper.length).toBe(1)
   });
 
   it('Component loading...', () => {
-    spyContext.mockReturnValue(contextCatalogNull);
+    spyContext.mockReturnValue(context(null));
     const component = shallow(<Catalog />);
     const wrapper = component.find('div')
     expect(wrapper.text()).toEqual('Loading')
   });
 
   it('Items not found', () => {
-    spyContext.mockReturnValue(contextCatalogEmpty);
+    spyContext.mockReturnValue(context(catalogEmptyState));
     const component = shallow(<Catalog />);
     const wrapper = component.find('.catalog').children()
     expect(wrapper.text()).toEqual('Ничего не найдено')
   });
 
   it('Should contain children components', () => {
-    spyContext.mockReturnValue(context);
+    spyContext.mockReturnValue(context(catalogFullState));
     const component = render(<Catalog />);
     const wrapper = component.find(".catalog-item")
     expect(wrapper.length).toBe(2)
   });
+
+  it('Should render popup confirmation window when click delete button', () => {
+    spyContext.mockReturnValue(context(catalogFullState));
+    const component = mount(<Catalog />);
+   component.find(".button").at(1).simulate('click')
+    expect(component.find(".popup-wrap").length).toBe(1)
+  })
+
+  it('editCallback should been called 1 times when click edit button', () => {
+    spyContext.mockReturnValue(context(catalogFullState));
+    const component = mount(<Catalog />);
+    component.find(".button").at(0).simulate('click')
+    expect(mockSetEditWindow).toHaveBeenCalledTimes(1)
+  })
+
 
 })

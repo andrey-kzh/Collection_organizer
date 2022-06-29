@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` Should render correct html snapshot 1`] = `
+<div
+  className="add-category-form-wrap"
+>
+  <form
+    className="add-category-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="add-category-form__input-wrap"
+    >
+      <input
+        className="add-category-form__input"
+        name="title"
+        onChange={[Function]}
+        placeholder="Название"
+        type="text"
+        value="Test-Title"
+      />
+      <button
+        className="add-category-form__button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Добавить
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`AddNewCategoryForm Should render correct html snapshot 1`] = `
+<div
+  className="add-category-form-wrap"
+>
+  <form
+    className="add-category-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="add-category-form__input-wrap"
+    >
+      <input
+        className="add-category-form__input"
+        name="title"
+        onChange={[Function]}
+        placeholder="Название"
+        type="text"
+        value="Test-Title"
+      />
+      <button
+        className="add-category-form__button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Добавить
+      </button>
+    </div>
+  </form>
+</div>
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogCategoryItem Should render correct html snapshot 1`] = `
+<div
+  className="catalog-item__category-item"
+>
+  Test-Title
+</div>
+`;

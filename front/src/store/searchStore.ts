@@ -85,7 +85,7 @@ export const searchStore = makeAutoObservable({
                 const mapedCatalog = mapCatalog(res.data.result)
                 runInAction(() => {
                     catalogStore.catalog.items = { ...catalogStore.catalog.items, ...mapedCatalog.items }
-                    catalogStore.catalog.list.push(mapedCatalog.list)
+                    catalogStore.catalog.list = catalogStore.catalog.list.concat(mapedCatalog.list)
                     searchStore.currentPage = nextPage
                 })
             } else {
