@@ -56,6 +56,7 @@ export const CatalogItem: React.FC<IProps> = React.memo(({ isAuth, title, anons,
     if (prevProps.title === nextProps.title &&
         prevProps.anons === nextProps.anons &&
         prevProps.image === nextProps.image &&
+        prevProps.isAuth === nextProps.isAuth &&
         JSON.stringify(prevProps.categories) === JSON.stringify(nextProps.categories)
     ) return true;
     return false

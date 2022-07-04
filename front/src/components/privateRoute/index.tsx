@@ -3,7 +3,12 @@ import {Route, Redirect} from 'react-router-dom';
 import {store} from "../../store";
 import {observer} from "mobx-react";
 
-export const PrivateRoute: React.FC = observer(({children, ...rest}) => {
+interface IProps {
+    exact?: boolean;
+    path: string;
+  }
+
+export const PrivateRoute: React.FC<IProps> = observer(({children, ...rest}) => {
 
     const {authStore: {isAuth}} = React.useContext(store);
 

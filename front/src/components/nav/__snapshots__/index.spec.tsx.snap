@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav Should render correct snapshot 1`] = `
+<nav
+  class="nav"
+>
+  <button
+    class="nav-button-search"
+  >
+    Поиск
+  </button>
+  <div
+    class="nav-wrap"
+  >
+    <button
+      class="nav-button"
+    >
+      Добавить
+    </button>
+    <a
+      class="nav-link"
+      href="/setup/"
+    >
+      Настройки
+    </a>
+    <button
+      class="nav-button"
+    >
+      Выход
+    </button>
+  </div>
+</nav>
+`;

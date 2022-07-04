@@ -22,5 +22,4 @@ export const Popup: React.FC<IProps> = ({ className, closeCallback, children }) 
             </div>
         </div>
     )
-
 }

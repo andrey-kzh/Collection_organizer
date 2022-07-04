@@ -33,5 +33,5 @@ const state = {
 export const store = React.createContext(state as IState);
 
 export const MobXProvider = ({children}: IProps): JSX.Element => {
-    return <store.Provider value={state}> {children} </store.Provider>
+    return <store.Provider value={state as IState}> {children} </store.Provider>
 };

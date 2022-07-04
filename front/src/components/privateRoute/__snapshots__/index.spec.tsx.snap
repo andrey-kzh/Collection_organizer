@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` Should render correct snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Memo(observerComponent)
+      path="/some-url/"
+    >
+      <Route
+        path="/some-url/"
+        render={[Function]}
+      />
+    </Memo(observerComponent)>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`PrivateRoute Should render correct snapshot 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Memo(observerComponent)
+      path="/some-url/"
+    >
+      <Route
+        path="/some-url/"
+        render={[Function]}
+      />
+    </Memo(observerComponent)>
+  </Router>
+</BrowserRouter>
+`;

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavButton Should render correct snapshot 1`] = `
+<button
+  className="nav-button-search"
+>
+  Поиск
+</button>
+`;

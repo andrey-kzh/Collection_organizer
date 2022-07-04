@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditCatalogItem Should render correct html snapshot 1`] = `
+<Popup
+  className=""
+  closeCallback={[Function]}
+>
+  <form
+    className="edit-cat-item-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="edit-cat-item-form__img-wrap"
+    >
+      <div>
+        <div
+          className="edit-cat-item-form__input-title"
+        >
+          Изображение
+        </div>
+        <label
+          className="button edit-cat-item-form__img-button"
+        >
+          Открыть
+          <input
+            accept="image/x-png,image/gif,image/jpeg"
+            className="edit-cat-item-form__img-input"
+            name="image"
+            onChange={[Function]}
+            type="file"
+          />
+        </label>
+      </div>
+      <div
+        className="edit-cat-item-form__img"
+        style={
+          Object {
+            "backgroundImage": "url(/test/img.jpg)",
+          }
+        }
+      >
+        <button
+          className="edit-cat-item-form-del"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <div
+      className="edit-cat-item-form__input-wrap"
+    >
+      <div
+        className="edit-cat-item-form__input-title"
+      >
+        Заголовок
+      </div>
+      <input
+        className="edit-cat-item-form__input"
+        name="title"
+        onChange={[Function]}
+        type="text"
+        value="Test title"
+      />
+      <div
+        className="edit-cat-item-form__input-title"
+      >
+        Описание
+      </div>
+      <textarea
+        className="edit-cat-item-form__textarea"
+        name="anons"
+        onChange={[Function]}
+        value="Test anons"
+      />
+    </div>
+    <Memo(observerComponent)
+      addSelectdedCategories={[Function]}
+      delSelectdedCategories={[Function]}
+      selectdedCategories={
+        Array [
+          12,
+          13,
+        ]
+      }
+    />
+    <div
+      className="edit-cat-item-form__submit-wrap"
+    >
+      <button
+        className="button"
+        onClick={[Function]}
+      >
+        Сохранить
+      </button>
+    </div>
+  </form>
+</Popup>
+`;
+
+exports[`EditCatalogItem isOpen рендер компонена 1`] = `
+<Popup
+  className=""
+  closeCallback={[Function]}
+>
+  <form
+    className="edit-cat-item-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="edit-cat-item-form__img-wrap"
+    >
+      <div>
+        <div
+          className="edit-cat-item-form__input-title"
+        >
+          Изображение
+        </div>
+        <label
+          className="button edit-cat-item-form__img-button"
+        >
+          Открыть
+          <input
+            accept="image/x-png,image/gif,image/jpeg"
+            className="edit-cat-item-form__img-input"
+            name="image"
+            onChange={[Function]}
+            type="file"
+          />
+        </label>
+      </div>
+      <div
+        className="edit-cat-item-form__img"
+        style={
+          Object {
+            "backgroundImage": "url(/test/img.jpg)",
+          }
+        }
+      >
+        <button
+          className="edit-cat-item-form-del"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <div
+      className="edit-cat-item-form__input-wrap"
+    >
+      <div
+        className="edit-cat-item-form__input-title"
+      >
+        Заголовок
+      </div>
+      <input
+        className="edit-cat-item-form__input"
+        name="title"
+        onChange={[Function]}
+        type="text"
+        value="Test title"
+      />
+      <div
+        className="edit-cat-item-form__input-title"
+      >
+        Описание
+      </div>
+      <textarea
+        className="edit-cat-item-form__textarea"
+        name="anons"
+        onChange={[Function]}
+        value="Test anons"
+      />
+    </div>
+    <Memo(observerComponent)
+      addSelectdedCategories={[Function]}
+      delSelectdedCategories={[Function]}
+      selectdedCategories={
+        Array [
+          12,
+          13,
+        ]
+      }
+    />
+    <div
+      className="edit-cat-item-form__submit-wrap"
+    >
+      <button
+        className="button"
+        onClick={[Function]}
+      >
+        Сохранить
+      </button>
+    </div>
+  </form>
+</Popup>
+`;

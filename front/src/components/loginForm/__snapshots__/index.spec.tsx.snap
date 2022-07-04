@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm Should render correct snapshot 1`] = `
+<div
+  className="login-form-wrap"
+>
+  <h1>
+    Авторизация
+  </h1>
+  <div
+    className="login-form__error"
+  >
+    Test error message
+  </div>
+  <form
+    className="login-form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="login-form__input"
+      name="login"
+      onChange={[Function]}
+      placeholder="Логин"
+      type="text"
+      value=""
+    />
+    <input
+      className="login-form__input"
+      name="password"
+      onChange={[Function]}
+      placeholder="Пароль"
+      type="password"
+      value=""
+    />
+    <Button
+      callback={[MockFunction]}
+      className="login-form__button"
+      name="Войти"
+    />
+  </form>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput Should render correct snapshot 1`] = `
+<input
+  class="search-form__input"
+  name="title"
+  placeholder="Название"
+  type="text"
+  value="Test search stirng"
+/>
+`;

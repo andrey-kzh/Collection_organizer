@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavButton Should render correct snapshot 1`] = `
+<div
+  class="popup-wrap test-classname"
+>
+  <div
+    class="popup"
+  >
+    <div
+      class="popup__close-wrap"
+    >
+      <button
+        class="popup__close"
+      />
+    </div>
+    <div
+      class="popup__content"
+    >
+      <div
+        class="children-classname"
+      >
+        test children
+      </div>
+    </div>
+  </div>
+</div>
+`;

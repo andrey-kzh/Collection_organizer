@@ -13,10 +13,10 @@ export interface ISearchStore {
     }
     request: {
         searchString: string,
-        selectdedCategories: number[] | null,
+        selectdedCategories: number[] | null | string,
     },
     setRequestParams: () => void,
-    setRequestParamsFromBowserSearchString: (searchString: string | null, categories: number[] | null ) => void,
+    setRequestParamsFromBowserSearchString: (searchString: string | null, categories: number[] | null | string ) => void,
     totalPages: number,
     setTotalPages: () => void,
     currentPage: number,
@@ -48,7 +48,7 @@ export const searchStore = makeAutoObservable({
             searchStore.request.selectdedCategories = searchStore.form.selectdedCategories
         })
     },
-    setRequestParamsFromBowserSearchString(searchString: string | null, categories: number[] | null) {
+    setRequestParamsFromBowserSearchString(searchString: any, categories: any) {
         searchStore.request.searchString = searchString
         searchStore.request.selectdedCategories = categories
     },

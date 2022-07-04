@@ -9,7 +9,7 @@ export interface ISetupStore {
     updateCategoryItem: () => void;
     deleteCategoryItem: () => void;
     editWindow: { isOpen: boolean, title: string, id: number };
-    setEditWindow: ({ }: { isOpen: boolean, id: number | null, title: string }) => void;
+    setEditWindow: ({ }: { isOpen?: boolean, id?: number | null, title: string }) => void;
 }
 
 export const setupStore = makeAutoObservable({

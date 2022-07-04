@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` Should render correct snapshot 1`] = `
+<div
+  class="popup-wrap "
+>
+  <div
+    class="popup"
+  >
+    <div
+      class="popup__close-wrap"
+    >
+      <button
+        class="popup__close"
+      />
+    </div>
+    <div
+      class="popup__content"
+    >
+      <div
+        class="select-category-header"
+      >
+        Категории
+      </div>
+      <div
+        class="select-category select-category_none"
+      >
+        <label
+          class="select-category-item"
+        >
+          <input
+            checked=""
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_01
+          </span>
+        </label>
+        <label
+          class="select-category-item"
+        >
+          <input
+            checked=""
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_02
+          </span>
+        </label>
+        <label
+          class="select-category-item"
+        >
+          <input
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_03
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SelectCategories Should render correct snapshot 1`] = `
+<div
+  class="popup-wrap "
+>
+  <div
+    class="popup"
+  >
+    <div
+      class="popup__close-wrap"
+    >
+      <button
+        class="popup__close"
+      />
+    </div>
+    <div
+      class="popup__content"
+    >
+      <div
+        class="select-category-header"
+      >
+        Категории
+      </div>
+      <div
+        class="select-category select-category_none"
+      >
+        <label
+          class="select-category-item"
+        >
+          <input
+            checked=""
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_01
+          </span>
+        </label>
+        <label
+          class="select-category-item"
+        >
+          <input
+            checked=""
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_02
+          </span>
+        </label>
+        <label
+          class="select-category-item"
+        >
+          <input
+            class="select-category-item__input"
+            name="category_item"
+            type="checkbox"
+          />
+          <span
+            class="select-category-item__title"
+          >
+            testCategoriesTitle_03
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

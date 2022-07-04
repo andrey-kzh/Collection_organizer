@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SetupCategoriesEditWin Should render correct snapshot 1`] = `
+<div
+  class="popup-wrap popup-wrap_setup-categorys"
+>
+  <div
+    class="popup"
+  >
+    <div
+      class="popup__close-wrap"
+    >
+      <button
+        class="popup__close"
+      />
+    </div>
+    <div
+      class="popup__content"
+    >
+      <div
+        class="setup-category-edit"
+      >
+        <input
+          class="setup-category-edit__title-input"
+          name="new_title"
+          placeholder="Название"
+          type="text"
+          value="Test title"
+        />
+      </div>
+      <div
+        class="setup-category-edit__buttons-wrap"
+      >
+        <button
+          class="button button_catalog-item"
+        >
+          Сохранить
+        </button>
+        <button
+          class="button button_catalog-item"
+        >
+          Удалить
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
