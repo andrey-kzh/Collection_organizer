@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CatalogItem Should render component snapshot 1`] = `
+<div
+  className="catalog-item"
+>
+  <div
+    className="catalog-item__img"
+    style={
+      Object {
+        "backgroundImage": "url(undefined/img/test.jpg)",
+      }
+    }
+  />
+  <div
+    className="catalog-item__txt"
+  >
+    <div
+      className="catalog-item__header"
+    >
+      testTitle
+    </div>
+    <div
+      className="catalog-item__categorys"
+    >
+      <Memo()
+        key="12"
+        title="testCategoriesTitle_01"
+      />
+      <Memo()
+        key="13"
+        title="testCategoriesTitle_02"
+      />
+    </div>
+    <div
+      className="catalog-item__anons"
+    >
+      testAnons
+    </div>
+  </div>
+  <div
+    className="catalog-item__ctrl-buttons"
+  >
+    <Button
+      callback={[Function]}
+      className="button_catalog-item"
+      name="Редактировать"
+    />
+    <Button
+      callback={[Function]}
+      className="button_catalog-item"
+      name="Удалить"
+    />
+  </div>
+</div>
+`;

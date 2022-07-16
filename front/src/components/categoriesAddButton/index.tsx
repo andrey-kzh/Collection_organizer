@@ -2,7 +2,7 @@ import * as React from "react";
 import './style.sass'
 
 interface IProps {
-    callback: Function
+    callback: () => void
 }
 
 export const CategoriesAddButton: React.FC<IProps> = ({ callback }) => {

@@ -4,11 +4,11 @@ import { Button } from "../button";
 
 interface IProps {
     id: number,
-    title: String,
-    openEditWindow?: Function
+    title: string,
+    openEditWindow?: () => void,
 }
 
-export const SetupCategoriesItem: React.FC<IProps> = React.memo(({ id, title, openEditWindow }) => {
+export const SetupCategoriesItem: React.FC<IProps> = React.memo(({ title, openEditWindow }) => {
     return (
         <div className="setup-categorys__item">
             <span className="setup-categorys__header">{title}</span>

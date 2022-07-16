@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoriesAddButton Should render correct html snapshot 1`] = `
+<button
+  className="categorys-add-button"
+  onClick={[Function]}
+>
+  Категории
+</button>
+`;

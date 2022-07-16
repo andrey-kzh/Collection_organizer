@@ -18,8 +18,7 @@ export const SearchForm: React.FC = observer(() => {
 
     const onClickFind = () => {
         setRequestParams()
-        const query = encodeURIComponent(searchString)
-        const url = encodeURI(`/?search=${query}&categories=${selectdedCategories}`)
+        const url = encodeURI(`/?search=${searchString}&categories=${selectdedCategories}`)
         history.push(url)
         setTotalPages()
         find()
@@ -30,7 +29,8 @@ export const SearchForm: React.FC = observer(() => {
         let searchString = '', categories = ''
         if (params.has('search')) searchString = decodeURIComponent(params.get('search'))
         if (params.has('categories')) categories = decodeURIComponent(params.get('categories'))
-        setRequestParamsFromBowserSearchString(searchString, categories)
+        const categoriesArr = categories.length > 0 ? categories.split(',').map(Number) : ''
+        setRequestParamsFromBowserSearchString(searchString,  categoriesArr)
         setTotalPages()
         find()
     }, [])

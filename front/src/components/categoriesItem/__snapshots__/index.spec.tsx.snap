@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoriesItem Should render correct html snapshot 1`] = `
+<label
+  className="category-item"
+>
+  <div
+    className="category-item__title"
+  >
+    Test Title
+  </div>
+  <input
+    className="category-item__input"
+    name="category_item"
+    type="checkbox"
+  />
+  <button
+    className="category-item__close"
+    onClick={[Function]}
+  >
+     
+  </button>
+</label>
+`;

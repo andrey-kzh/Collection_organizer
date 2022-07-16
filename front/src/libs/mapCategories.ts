@@ -1,4 +1,4 @@
-export function mapCategories(categories: Array<object>) {
+export function mapCategories(categories: Array<object>): {items: { [index: string]: any }, list: number[]} {
 
     let normalized: { items: { [index: string]: any }, list: number[] } = {
         items: {},

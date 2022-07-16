@@ -5,14 +5,10 @@ import { store } from "../../store";
 import { observer } from "mobx-react";
 import useConfirmationDialog from "../../hooks/useConfirmationDialog"
 
-interface IProps {
-    id: number,
-    title: string,
-}
 
 export const SetupCategoriesEditWin: React.FC = observer(() => {
 
-    const { setupStore: { editWindow: { id, isOpen, title }, setEditWindow, updateCategoryItem, deleteCategoryItem } } = React.useContext(store)
+    const { setupStore: { editWindow: { isOpen, title }, setEditWindow, updateCategoryItem, deleteCategoryItem } } = React.useContext(store)
 
     const { ConfirmationDialog, onOpen } = useConfirmationDialog({
         header: 'Удалить?',

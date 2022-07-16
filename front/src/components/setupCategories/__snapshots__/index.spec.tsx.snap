@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SetupCategories Should render correct snapshot 1`] = `
+<div
+  class="setup-categorys"
+>
+  <div
+    class="setup-categorys__item"
+  >
+    <span
+      class="setup-categorys__header"
+    >
+      testCategoriesTitle_03
+    </span>
+    <button
+      class="button button_setup-categorys-item"
+    >
+      Редактировать
+    </button>
+  </div>
+  <div
+    class="setup-categorys__item"
+  >
+    <span
+      class="setup-categorys__header"
+    >
+      testCategoriesTitle_02
+    </span>
+    <button
+      class="button button_setup-categorys-item"
+    >
+      Редактировать
+    </button>
+  </div>
+  <div
+    class="setup-categorys__item"
+  >
+    <span
+      class="setup-categorys__header"
+    >
+      testCategoriesTitle_01
+    </span>
+    <button
+      class="button button_setup-categorys-item"
+    >
+      Редактировать
+    </button>
+  </div>
+</div>
+`;

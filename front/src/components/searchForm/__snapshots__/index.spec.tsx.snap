@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm Should render correct snapshot 1`] = `
+<div
+  className="search-form-wrap"
+>
+  <form
+    className="search-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="search-form__input-wrap"
+    >
+      <Memo(observerComponent) />
+      <button
+        className="search-form__button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Найти
+      </button>
+      <Memo(observerComponent)
+        addSelectdedCategories={[MockFunction]}
+        delSelectdedCategories={[MockFunction]}
+        selectdedCategories={
+          Array [
+            112,
+            113,
+          ]
+        }
+      />
+    </div>
+  </form>
+</div>
+`;

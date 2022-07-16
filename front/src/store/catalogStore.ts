@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { makeAutoObservable, runInAction } from "mobx";
 import { api } from "../api";
 
@@ -12,15 +13,15 @@ export interface ICatalogStore {
         anons: string,
         relatedCategories: number[]
     },
-    setEditWindow: Function,
-    addRelatedCategories: Function,
-    delRelatedCategories: Function,
-    saveCatalogItem: Function,
-    addCatalogItem: Function,
-    updateCatalogItem: Function,
-    delCatalogItem: Function,
+    setEditWindow: ({}: { [index: string]: any }) => void,
+    addRelatedCategories: (categoryId: number) => void,
+    delRelatedCategories: (categoryId: number) => void,
+    saveCatalogItem: () => void,
+    addCatalogItem: () => void,
+    updateCatalogItem: () => void,
+    delCatalogItem: () => void,
     deleteId: number,
-    setDeleteId: Function,
+    setDeleteId: (id: number) => void,
 }
 
 export const catalogStore = makeAutoObservable({
@@ -85,13 +86,17 @@ export const catalogStore = makeAutoObservable({
             catalogStore.editWindow.img,
             catalogStore.editWindow.relatedCategories
         )
-        if (res.status === 200) {
-            catalogStore.setEditWindow({ isOpen: false })
-            const catalogItem = await api.getCatalogItem(res.data.id)
-            if (catalogItem.status === 200) {
-                runInAction(() => {
-                    catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
-                })
+        if (!(res instanceof Error)) {
+            if (res.status === 200) {
+                catalogStore.setEditWindow({ isOpen: false })
+                const catalogItem = await api.getCatalogItem(res.data.id)
+                if (!(catalogItem instanceof Error)) {
+                    if (catalogItem.status === 200) {
+                        runInAction(() => {
+                            catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
+                        })
+                    }
+                }
             }
         }
     },
@@ -102,14 +107,18 @@ export const catalogStore = makeAutoObservable({
             catalogStore.editWindow.img,
             catalogStore.editWindow.relatedCategories
         )
-        if (res.status === 200) {
-            catalogStore.setEditWindow({ isOpen: false })
-            const catalogItem = await api.getCatalogItem(res.data.id)
-            if (catalogItem.status === 200) {
-                runInAction(() => {
-                    catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
-                    catalogStore.catalog.list.unshift(catalogItem.data.id)
-                })
+        if (!(res instanceof Error)) {
+            if (res.status === 200) {
+                catalogStore.setEditWindow({ isOpen: false })
+                const catalogItem = await api.getCatalogItem(res.data.id)
+                if (!(catalogItem instanceof Error)) {
+                    if (catalogItem.status === 200) {
+                        runInAction(() => {
+                            catalogStore.catalog.items[catalogItem.data.id] = catalogItem.data
+                            catalogStore.catalog.list.unshift(catalogItem.data.id)
+                        })
+                    }
+                }
             }
         }
     },
@@ -121,13 +130,15 @@ export const catalogStore = makeAutoObservable({
     },
     async delCatalogItem() {
         const res = await api.delCatalogItem(catalogStore.deleteId)
-        if (res.status === 200 && res.data.id) {
-            runInAction(() => {
-                const i = catalogStore.catalog.list.indexOf(res.data.id);
-                catalogStore.catalog.list.splice(i, 1)
-                delete catalogStore.catalog.items[res.data.id]
-                catalogStore.deleteId = null
-            })
+        if (!(res instanceof Error)) {
+            if (res.status === 200 && res.data.id) {
+                runInAction(() => {
+                    const i = catalogStore.catalog.list.indexOf(res.data.id);
+                    catalogStore.catalog.list.splice(i, 1)
+                    delete catalogStore.catalog.items[res.data.id]
+                    catalogStore.deleteId = null
+                })
+            }
         }
     }
 

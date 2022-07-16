@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectCategoriesItem Should render correct html snapshot 1`] = `
+<label
+  className="select-category-item"
+>
+  <input
+    checked={true}
+    className="select-category-item__input"
+    name="category_item"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="select-category-item__title"
+  >
+    TestTitle
+  </span>
+</label>
+`;

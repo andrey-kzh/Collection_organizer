@@ -10,7 +10,7 @@ import {ICategoriesStore} from "./categoriesStore"
 import {catalogStore} from "./catalogStore"
 import {ICatalogStore} from "./catalogStore"
 
-interface State {
+interface IState {
     searchStore: ISearchStore;
     authStore: IAuthStore;
     setupStore: ISetupStore;
@@ -18,7 +18,7 @@ interface State {
     catalogStore: ICatalogStore;
 }
 
-interface Props {
+interface IProps {
     children: React.ReactNode
 }
 
@@ -30,8 +30,8 @@ const state = {
     catalogStore: catalogStore,
 };
 
-export const store = React.createContext<State>(state);
+export const store = React.createContext(state as IState);
 
-export const MobXProvider = ({children}: Props): JSX.Element => {
-    return <store.Provider value={state}> {children} </store.Provider>
+export const MobXProvider = ({children}: IProps): JSX.Element => {
+    return <store.Provider value={state as IState}> {children} </store.Provider>
 };
