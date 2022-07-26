@@ -19,7 +19,7 @@ const build = process.env.BUILD_ENV;
 const isDev = (build !== 'production');
 const rootFolder = path.resolve(__dirname, '..');
 const targetFolder = isDev ? "front/dist" : "server/public";
-const backendHost = isDev ? 'http://localhost:3000' : '';
+const backendHost = isDev ? 'http://localhost:3001' : '';
 const modeVal = isDev ? 'development' : 'production';
 const devtoolVal = isDev ? 'source-map' : 'eval-nosources-cheap-source-map';
 
