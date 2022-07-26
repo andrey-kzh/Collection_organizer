@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.6 (Ubuntu 12.6-0ubuntu0.20.04.1)
+-- Dumped from database version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.11 (Ubuntu 12.11-0ubuntu0.20.04.1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -242,9 +242,9 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 COPY public.catalog (id, user_id, image, title, title_idx, anons, anons_idx) FROM stdin;
-46	41	/img/test1.jpg	Простой запрос	'запрос':2 'прост':1	анонс для теста	'анонс':1 'тест':3
-48	41	/img/test2.jpg	Тестовый заголовок2	'заголовок2':2 'тестов':1	Тестовый анонс2	'анонс2':2 'тестов':1
-49	41	/img/test1.jpg	Запрос	'запрос':1	анонс	'анонс':1
+55	41	\N	Это тестовая штука	'тестов':2 'штук':3 'эт':1	Тестовое описание	'описан':2 'тестов':1
+48	41		Тестовый заголовок2	'заголовок2':2 'тестов':1	Тестовый анонс2	'анонс2':2 'тестов':1
+46	41		Простой запрос	'запрос':2 'прост':1	анонс для теста	'анонс':1 'тест':3
 \.
 
 
@@ -253,9 +253,8 @@ COPY public.catalog (id, user_id, image, title, title_idx, anons, anons_idx) FRO
 --
 
 COPY public.category (id, title, user_id) FROM stdin;
-8	Пластинки	41
-9	Диски	41
-10	Кассеты	41
+43	Пластинки	41
+8	Кассеты	41
 \.
 
 
@@ -264,11 +263,12 @@ COPY public.category (id, title, user_id) FROM stdin;
 --
 
 COPY public.related_category (id, catalog_id, category_id) FROM stdin;
-145	48	8
-146	48	9
-147	49	8
-148	49	9
-149	49	10
+155	55	8
+156	55	43
+183	48	\N
+184	48	43
+189	46	8
+190	46	\N
 \.
 
 
@@ -277,7 +277,6 @@ COPY public.related_category (id, catalog_id, category_id) FROM stdin;
 --
 
 COPY public.sessions (id, user_id, token, last_visit) FROM stdin;
-8	41	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQxLCJpYXQiOjE2MTQxNjk2OTV9.0KUq0bEAdNsK2qVj8xGVWH0PbQODpPDtP4w9pduQIe4	2021-03-02 17:37:08.312
 \.
 
 
@@ -287,6 +286,7 @@ COPY public.sessions (id, user_id, token, last_visit) FROM stdin;
 
 COPY public.users (id, name, login, password, salt) FROM stdin;
 41	Андрей	test	40abac5ea0d0c22366d89915fe9805a3c82598731494b2e78e2f0b2dcb2094aedd61268df803abf9efff5e2b578e473dd22ed3b9129eb7ded1b0636be91e0bfd97f68c48998d509e278c2989ef99928a6160932ebdee5119046e8f3c458eca7eb77ae966cc26dcf15d39df9bc1e99a15855ef27e68841988eb00a879fccae6f3	d879900215e918ff1d73d1a22d0dacf8ad5aceff998e1b93b8c25232052682ad60a0c3be336a1c0c84f35f16f5648185af05c44d9dec2402f72ad68084414b4245d82ef632b5b1b1f8eab724972daccfe45d0ff07a323ef8c2a3c3993495bff8b030d0959f88d7b036bb97e72d4124ab32d37a59c4ca195bd0a405e84bc8ffb7
+42	Demo	demo	c78cb72ad643b8682ef8dd9d883c748f651514972dadee5704babdd3a7494cefe199f8b9b954103ec1c79cb367b29e20596390bf8b3b22ed301d39968e011a9f7e3bde5f12da318f72aff8ef94cb65e7bd2a313ffdee552f7351e5c7ebf9c59c741fd32498ec48a2018804dc42f527ee9b1c8fd2c8103a99296387b064e9fa9c	9aa4b66292491404f8ae86d68837803c1285483252167b5c9f540a1e5206e1d5af392b89ac3e81eec76a54fe5a20211c14f51729ca8d278a2da52e2fa24d77ea4731288f2f29fa437481a44328578668ff202aa86b5bd7e1778eba6102784a8c723714f5a9f7be889980d33d5e802d0ada1d7262f0ccf33193646d6003274742
 \.
 
 
@@ -294,35 +294,35 @@ COPY public.users (id, name, login, password, salt) FROM stdin;
 -- Name: catalog_id_catalog_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.catalog_id_catalog_seq', 49, true);
+SELECT pg_catalog.setval('public.catalog_id_catalog_seq', 55, true);
 
 
 --
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categories_id_seq', 10, true);
+SELECT pg_catalog.setval('public.categories_id_seq', 43, true);
 
 
 --
 -- Name: related_categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.related_categories_id_seq', 149, true);
+SELECT pg_catalog.setval('public.related_categories_id_seq', 190, true);
 
 
 --
 -- Name: session_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.session_id_seq', 8, true);
+SELECT pg_catalog.setval('public.session_id_seq', 31, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 41, true);
+SELECT pg_catalog.setval('public.users_id_seq', 42, true);
 
 
 --

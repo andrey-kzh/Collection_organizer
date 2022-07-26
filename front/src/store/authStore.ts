@@ -15,8 +15,8 @@ export interface IAuthStore {
 }
 
 export const authStore = makeAutoObservable({
-    login: '',
-    password: '',
+    login: 'demo',
+    password: 'demo123',
     errorLogin: '',
     isAuth: null,
     setLogin(login: string) {
