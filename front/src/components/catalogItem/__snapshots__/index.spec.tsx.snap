@@ -5,13 +5,14 @@ exports[`CatalogItem Should render component snapshot 1`] = `
   className="catalog-item"
 >
   <div
-    className="catalog-item__img"
-    style={
-      Object {
-        "backgroundImage": "url(undefined/img/test.jpg)",
-      }
-    }
-  />
+    className="catalog-item__img__wrap"
+  >
+    <img
+      alt="testTitle"
+      className="catalog-item__img"
+      src="undefined/img/test.jpg"
+    />
+  </div>
   <div
     className="catalog-item__txt"
   >
