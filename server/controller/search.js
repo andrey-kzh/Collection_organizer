@@ -1,6 +1,7 @@
 const err = require('../libs/exception').errorCreator;
 const Search = require('../model/search');
 const config = require('../config');
+const { filterCatalogByCategorys } = require('../libs/filterCatalog')
 
 module.exports = {
 
@@ -18,8 +19,10 @@ module.exports = {
                 const totalPages = Math.ceil(totalItems.count / config.catalogPerPage);
                 res.status(200).json({ totalPages });
             } else { // Кол-во страниц соответствующих поисковому запросу
+
                 let totalItems = await Search.findCatalogBySearchString(search, categories, 'ALL', 0);
-                totalItems = totalItems.filter((catalogItem) => catalogItem.categories.length >= categories.split(',').length);
+                totalItems = filterCatalogByCategorys(totalItems, categories)
+
                 if (totalItems) {
                     totalItemsCount = totalItems.length;
                     const totalPages = Math.ceil(totalItemsCount / config.catalogPerPage);
@@ -50,8 +53,10 @@ module.exports = {
                 const result = await Search.selectAllCatalogItems(config.catalogPerPage, offset);
                 res.status(200).json({ result });
             } else { // Страницы соответствующие поисковому запросу
+
                 let result = await Search.findCatalogBySearchString(search, categories, config.catalogPerPage, offset);
-                result = result.filter((catalogItem) => catalogItem.categories.length >= categories.split(',').length);
+                result = filterCatalogByCategorys(result, categories)
+
                 res.status(200).json({ result });
             }
         } catch (e) {
