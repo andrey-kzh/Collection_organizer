@@ -25,7 +25,11 @@ export const CatalogItem: React.FC<IProps> = React.memo(({ isAuth, title, anons,
 
     return (
         <div className="catalog-item">
-            <div className="catalog-item__img" style={{ backgroundImage: `url(${image ? process.env.BACKEND_HOST + image : ''})` }}></div>
+
+            <div className="catalog-item__img__wrap">
+                <img alt={title} className="catalog-item__img" src={`${image ? process.env.BACKEND_HOST + image : ''}`} />
+            </div>
+
             <div className="catalog-item__txt">
                 <div className="catalog-item__header">{title}</div>
 

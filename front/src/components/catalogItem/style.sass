@@ -3,21 +3,25 @@
 
 .catalog-item
   display: grid
-  grid-template-columns: 200px minmax(0, 1fr) 150px
+  grid-template-columns: 250px minmax(0, 1fr) 150px
   align-items: start
   margin: 0 0 50px 0
   @media screen and (max-width: $mobileResolution)
     display: block
 
+.catalog-item__img__wrap
+  @media screen and (max-width: $mobileResolution)
+    margin: 0 0 15px 0
+
 .catalog-item__img
-  width: 200px
-  height: 130px
-  background-size: contain
+  width: 250px
+  max-height: 200px
+  object-fit: contain
+  object-position: center top
   @media screen and (max-width: $mobileResolution)
     width: 100%
-    height: calc(100vw / 4 * 3 - 20px)
-    background-size: cover
-    margin: 0 0 15px 0
+    height: auto
+    max-height: none
 
 .catalog-item__txt
   padding: 0 20px
