@@ -15,5 +15,5 @@ module.exports = {
     },
     jwtSecretKey: local.jwtSecretKey,
     sessionExpirationDays: 30, // days
-    catalogPerPage: 40,
+    catalogPerPage: 20,
 };
