@@ -65,6 +65,7 @@ export const searchStore = makeAutoObservable({
     },
     currentPage: 1,
     async find(currentPage = 1) {
+        catalogStore.catalog = { items: {}, list: [] }
         const res = await api.findCatalogItems(searchStore.request.searchString, searchStore.request.selectdedCategories, currentPage)
         if (!(res instanceof Error)) {
             if (res.status === 200 && res.data.result) {

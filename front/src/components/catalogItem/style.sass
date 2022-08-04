@@ -6,9 +6,22 @@
   grid-template-columns: 250px minmax(0, 1fr) 150px
   align-items: start
   margin: 0 0 50px 0
+  opacity: 0
   @media screen and (max-width: $mobileResolution)
     display: block
 
+.catalog-item_animated
+  animation-name: fadeInUp
+  animation-duration: 0.5s
+  animation-fill-mode: both
+
+@keyframes fadeInUp 
+  from
+    transform: translate3d(0,60px,0)
+  to
+    transform: translate3d(0,0,0)
+    opacity: 1
+    
 .catalog-item__img__wrap
   @media screen and (max-width: $mobileResolution)
     margin: 0 0 15px 0

@@ -54,6 +54,9 @@ describe('Catalog component', () => {
 
   const spyContext = jest.spyOn(React, 'useContext');
 
+  const intersectionObserverMock = () => ({ observe: () => {} })
+  window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+
   it('Should render', () => {
     spyContext.mockReturnValue(context(catalogEmptyState));
     const component = shallow(<Catalog />);
