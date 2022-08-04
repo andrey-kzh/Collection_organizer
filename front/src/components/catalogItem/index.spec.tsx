@@ -15,6 +15,9 @@ const props = {
 
 describe('CatalogItem', () => {
 
+    const intersectionObserverMock = () => ({ observe: () => {} })
+    window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+
     it('Should render component snapshot', () => {
         const component = shallow(<CatalogItem {...props} />)
         expect(component).toMatchSnapshot()

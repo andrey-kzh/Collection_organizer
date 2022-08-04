@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './style.sass'
 import { Button } from "../button";
 import { CatalogCategoryItem } from "../catalogCategoryItem"
+import useIntersecting from "../../hooks/useIntersectionObserver"
 
 interface IProps {
     isAuth: boolean,
@@ -23,8 +24,13 @@ export const CatalogItem: React.FC<IProps> = React.memo(({ isAuth, title, anons,
         })
     }
 
+    const [animatedClass, setAnimatedClass] = useState('')
+    const animatedBlock = useRef()
+    const isIntersecting = useIntersecting(animatedBlock)
+    if (isIntersecting && (animatedClass === '')) setAnimatedClass('catalog-item_animated')
+
     return (
-        <div className="catalog-item">
+        <div ref={animatedBlock} className={`catalog-item ${animatedClass}`}>
 
             <div className="catalog-item__img__wrap">
                 <img alt={title} className="catalog-item__img" src={`${image ? process.env.BACKEND_HOST + image : ''}`} />

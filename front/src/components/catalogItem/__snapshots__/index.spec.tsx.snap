@@ -2,7 +2,7 @@
 
 exports[`CatalogItem Should render component snapshot 1`] = `
 <div
-  className="catalog-item"
+  className="catalog-item "
 >
   <div
     className="catalog-item__img__wrap"
