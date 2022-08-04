@@ -33,7 +33,7 @@ export const SelectCategories: React.FC<IProps> = observer(({ selectdedCategorie
     }
 
     return (
-        <Popup className='' closeCallback={() => setIsOpen(false)}>
+        <Popup className='popup-wrap_categories-selector' closeCallback={() => setIsOpen(false)}>
             <div className="select-category-header">Категории</div>
             <div className="select-category select-category_none">
                 {renderCategories()}

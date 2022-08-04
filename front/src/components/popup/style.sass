@@ -23,20 +23,24 @@
   padding: 30px
   box-sizing: border-box
   box-shadow: 4px 4px 0 0 rgba(50, 50, 50, 0.75)
-  animation-name: popup-scale 
-  animation-duration: 0.3s
+  animation-name: popup-animation
+  animation-duration: 0.2s
   animation-fill-mode: both
+  opacity: 0.6
   @media screen and (max-width: $mobileResolution)
     max-width: 100%
     width: 100%
     height: 100%
 
-@keyframes popup-scale 
+@keyframes popup-animation 
   from
-    transform: scale(0.6)
+    margin-top: 60px
+    //transform: scale(0.6)
   to
-    transform: scale(1)
-
+    margin-top: 0
+    opacity: 1
+    //transform: scale(1)
+    
 .popup__content
   overflow-y: auto
   max-height: 80vh
@@ -68,6 +72,9 @@
 
 .popup-wrap_delete-confirmation
   z-index: 110
+
+.popup-wrap_categories-selector
+  z-index: 120
 
 .popup-delete-confirmation__header
   text-align: center
