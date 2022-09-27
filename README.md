@@ -1,7 +1,5 @@
 ## Personal Collection
 
-### [Demo](https://05.xpym-xpym.ru) 
-
 ---
 
 SCSS, PUG
